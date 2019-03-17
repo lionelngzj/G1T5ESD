@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(16) NOT NULL,
   `fullname` char(25) NOT NULL,
   `hp` int(8) NOT NULL,
-  `password` char(16) NOT NULL,
+  `password` varchar(16) NOT NULL,
   PRIMARY KEY (`userid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
