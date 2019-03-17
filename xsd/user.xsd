@@ -42,4 +42,38 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <xs:element name="add_user">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="username" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="16" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="fullname" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="25" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="hp" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:int">
+                            <xs:totalDigits value="8" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="password" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="16" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>
