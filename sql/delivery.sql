@@ -3,31 +3,14 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+08:00";
 
---
--- Database: `user`
---
-DROP DATABASE IF EXISTS `users`;
-CREATE DATABASE `users` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `users`;
+DROP DATABASE IF EXISTS APPuser;
+CREATE DATABASE APPuser DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE APPuser;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-  `username` varchar(64) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  `phonenumber` varchar(8) NOT NULL,
-  CONSTRAINT user_pk1 PRIMARY KEY (username)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `user`
---
-INSERT INTO `user` (`username`, `name`, `phonenumber`) VALUES
-('tom123', 'Tom Tan', '99998888'),
-('lee123', 'Lee Sin', '91231234');
-
--- --------------------------------------------------------
+CREATE TABLE APPuser
+(UserID int NOT NULL AUTO_INCREMENT,
+ Username varchar(25) NOT NULL,
+ Fullname varchar(25) NOT NULL,
+ PhoneNo int NOT NULL,
+ UserPW varchar(25) NOT NULL,
+ constraint userID_pk primary key (UserID));
