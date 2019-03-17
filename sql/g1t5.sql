@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `userid` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(16) NOT NULL,
   `fullname` char(25) NOT NULL,
-  `hp` varchar(8) NOT NULL,
+  `hp` int(8) NOT NULL,
   `password` char(16) NOT NULL,
   PRIMARY KEY (`userid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
