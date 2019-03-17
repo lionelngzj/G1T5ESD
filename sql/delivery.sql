@@ -15,7 +15,6 @@ USE `users`;
 --
 -- Table structure for table `user`
 --
-DROP TABLE IF EXISTS `address`;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `username` varchar(64) NOT NULL,
