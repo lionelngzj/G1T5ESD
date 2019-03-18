@@ -105,6 +105,18 @@ CREATE TABLE IF NOT EXISTS `restaurant_list` (
     PRIMARY KEY (rid)
     )
 
+INSERT INTO restaurant_list (rid, name, phone, street, unit_no, postal_code) VALUES
+(1, 'Odette', 91234567, "1 St Andrew's Rd", '#01-04', 178957 ),
+(2, 'BAKALAKI Greek Taverna', 91234568, "3 Seng Poh Rd", '#02-03', 168891 ),
+(3, 'Jiang-Nan Chun', 91234569,  '190 Orchard Blvd', '#12-01', 248646),
+(4, 'Colony', 91234560, "7 Raffles Ave, The Ritz-Carlton, Millenia Singapore", '#01-14', 039799 ),
+(5, 'Meta Restaurant', 91234561, "1 Keong Saik Rd", '#22-03', 089109 ),
+(6, 'NOX - Dine in the Dark', 91234562,  '269 Beach Rd', '#14-21', 199546),
+(7, 'Ballisco', 91234563, "1 Cuscaden Rd, Level 2 Regent Singapore A Four Seasons Hotel", '#02-04', 249715 ),
+(8, 'Summer Pavilion', 91234564, "7 Raffles Ave", '#03-03', 039799 ),
+(9, 'Cheek By Jowl', 91234565,  '21 Boon Tat St', '#42-01', 069620),
+(10, 'Rhubarb', 91234566,  '3 Duxton Hill', '#112-01', 089589);
+
 
 DROP TABLE IF EXISTS `menuitems`;
 CREATE TABLE IF NOT EXISTS `menuitems` (
@@ -117,9 +129,8 @@ CREATE TABLE IF NOT EXISTS `menuitems` (
 	CONSTRAINT menuitems_fk FOREIGN KEY (rid)
         REFERENCES restaurant_list (rid)
     )
-<<<<<<< HEAD
 
-INSERT INTO `menuitems` VALUES
+INSERT INTO `menuitems` (`rid`, `fid`, `name`, `unit_price`, `category`) VALUES
 (1, 1, "Eggs Benedict", 10.90, "Food"),
 (1, 2, "Club Sandwich", 7.90, "Food"),
 (1, 3, "Cheesy Omelette", 8.90, "Food"),
@@ -256,17 +267,3 @@ INSERT INTO `menuitems` VALUES
 (10, 12, "Fresh Milk", 2.00, "Drinks"),
 (10, 13, "Iced Peach Tea", 2.50, "Drinks"),
 (10, 14, "Oolong Tea", 2.50, "Drinks");
-=======
-    
-INSERT INTO restaurant_list (rid, name, phone, street, unit_no, postal_code) VALUES
-(1, 'Odette', 91234567, "1 St Andrew's Rd", '#01-04', 178957 ),
-(2, 'BAKALAKI Greek Taverna', 91234568, "3 Seng Poh Rd", '#02-03', 168891 ),
-(3, 'Jiang-Nan Chun', 91234569,  '190 Orchard Blvd', '#12-01', 248646),
-(4, 'Colony', 91234560, "7 Raffles Ave, The Ritz-Carlton, Millenia Singapore", '#01-14', 039799 ),
-(5, 'Meta Restaurant', 91234561, "1 Keong Saik Rd", '#22-03', 089109 ),
-(6, 'NOX - Dine in the Dark', 91234562,  '269 Beach Rd', '#14-21', 199546),
-(7, 'Ballisco', 91234563, "1 Cuscaden Rd, Level 2 Regent Singapore A Four Seasons Hotel", '#02-04', 249715 ),
-(8, 'Summer Pavilion', 91234564, "7 Raffles Ave", '#03-03', 039799 ),
-(9, 'Cheek By Jowl', 91234565,  '21 Boon Tat St', '#42-01', 069620),
-(10, 'Rhubarb', 91234566,  '3 Duxton Hill', '#112-01', 089589);
->>>>>>> e2b2a5f5c5fe1374a2e701e0403ed3fa21879add
