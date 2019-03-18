@@ -61,3 +61,28 @@ INSERT INTO `orderitems` (`orderid`, `itemid`, `quantity`) VALUES
 (3, 25, 1);
 
 -- -----------------------------------------------------------------------------------------
+
+CREATE DATABASE IF NOT EXISTS `restaurant` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `restaurant`;
+
+DROP TABLE IF EXISTS `restaurant_list`;
+CREATE TABLE IF NOT EXISTS `restaurant_list` (
+    `rid` int(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    `phone` int(11) NOT NULL,
+    `street` varchar(255) NOT NULL,
+    `unit_no` int(11) NOT NULL,
+    `postal_code` int(11) NOT NULL,
+    PRIMARY KEY (rid)
+    )
+DROP TABLE IF EXISTS `menuitems`;
+CREATE TABLE IF NOT EXISTS `menuitems` (
+    `rid` int(11) NOT NULL,
+    `fid` int(11) NOT NULL,
+    `name` varchar(255) NOT NULL,
+    `unit_price` float(11) NOT NULL,
+    `category` varchar(255) NOT NULL,
+    PRIMARY KEY (`rid`, `fid`),
+	CONSTRAINT menuitems_fk FOREIGN KEY (rid)
+        REFERENCES restaurant_list (rid)
+    )
