@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Studio 2018 (https://www.liquid-technologies.com) -->
+<user xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\Users\SIS - Shawn Lee\Desktop\G1T5ESD\xsd\user.xsd">
+    <userid>1</userid>
+    <username>shawnlee95</username>
+    <fullname>Shawn Lee Min Hwee</fullname>
+    <hp>98765432</hp>
+    <password>apple123</password>
+</user>
