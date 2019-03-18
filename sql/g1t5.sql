@@ -4,27 +4,55 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 -- -----------------------------------------------------------------------------------------
-CREATE DATABASE IF NOT EXISTS `user` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+DROP DATABASE IF EXISTS `user`;
+CREATE DATABASE `user` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `user`;
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `userid` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `address`;
+DROP TABLE IF EXISTS `consumer`;
+CREATE TABLE IF NOT EXISTS `consumer` (
   `username` varchar(16) NOT NULL,
   `fullname` char(25) NOT NULL,
   `hp` int(8) NOT NULL,
   `password` varchar(16) NOT NULL,
-  PRIMARY KEY (`userid`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`username`)
+)ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `user` (`userid`, `username`, `fullname`, `hp`, `password`) VALUES
-(NULL, 'shawnlee95', 'Shawn Lee Min Hwee', '98765432', 'apple123'),
-(NULL, 'lionelng96', 'Lionel Ng Ze Ji', '87654321', 'pear123'),
-(NULL, 'gohyuxin', 'Goh Yu Xin', '76543210', 'orange123');
+INSERT INTO `consumer` (`username`, `fullname`, `hp`, `password`) VALUES
+('shawnlee95', 'Shawn Lee Min Hwee', '98765432', 'apple123'),
+('lionelng96', 'Lionel Ng Ze Ji', '87654321', 'pear123'),
+('gohyuxin', 'Goh Yu Xin', '76543210', 'orange123');
+
+CREATE TABLE IF NOT EXISTS `address` (
+  `username` varchar(16) NOT NULL,
+  `addressline` varchar(64) NOT NULL,
+  `postalcode` varchar(6) NOT NULL,
+  PRIMARY KEY (`username`, `addressline`),
+  CONSTRAINT address_fk FOREIGN KEY (username)
+    REFERENCES consumer (username)
+)ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+INSERT INTO `address` (`username`, `addressline`, `postalcode`) VALUES
+('shawnlee95', '123 Clementi', '120123'),
+('shawnlee95', '222 Clementi Road', '120222');
+
+DROP TABLE IF EXISTS `drivers`;
+CREATE TABLE IF NOT EXISTS `drivers` (
+  `username` varchar(16) NOT NULL,
+  `fullname` char(25) NOT NULL,
+  `hp` int(8) NOT NULL,
+  `password` varchar(16) NOT NULL,
+  `wallet` float NOT NULL DEFAULT 0.0,
+  PRIMARY KEY (`username`)
+)ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+INSERT INTO `drivers` (`username`, `fullname`, `hp`, `password`) VALUES
+('ignatiusdriver', 'Ignatius Tan', 99998888,'iggy123'),
+('shawndriver', 'Shawn Lee', 88889999,'shawn123');
 
 -- -----------------------------------------------------------------------------------------
-
-CREATE DATABASE IF NOT EXISTS `foodorders` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+DROP DATABASE IF EXISTS `foodorders`;
+CREATE DATABASE `foodorders` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `foodorders`;
 
 DROP TABLE IF EXISTS `orderitems`;
@@ -34,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `userid` int(11) NOT NULL,
   `restaurantid` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT NOW(),
+  `driver_username` varchar(16) DEFAULT NULL, 
   `paymentid` int(11) NOT NULL,
   PRIMARY KEY (`orderid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
@@ -88,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `menuitems` (
 	CONSTRAINT menuitems_fk FOREIGN KEY (rid)
         REFERENCES restaurant_list (rid)
     )
+<<<<<<< HEAD
 
 INSERT INTO `menuitems` VALUES
 (1, 1, "Eggs Benedict", 10.90, "Food"),
@@ -226,3 +256,17 @@ INSERT INTO `menuitems` VALUES
 (10, 12, "Fresh Milk", 2.00, "Drinks"),
 (10, 13, "Iced Peach Tea", 2.50, "Drinks"),
 (10, 14, "Oolong Tea", 2.50, "Drinks");
+=======
+    
+INSERT INTO restaurant_list (rid, name, phone, street, unit_no, postal_code) VALUES
+(1, 'Odette', 91234567, "1 St Andrew's Rd", '#01-04', 178957 ),
+(2, 'BAKALAKI Greek Taverna', 91234568, "3 Seng Poh Rd", '#02-03', 168891 ),
+(3, 'Jiang-Nan Chun', 91234569,  '190 Orchard Blvd', '#12-01', 248646),
+(4, 'Colony', 91234560, "7 Raffles Ave, The Ritz-Carlton, Millenia Singapore", '#01-14', 039799 ),
+(5, 'Meta Restaurant', 91234561, "1 Keong Saik Rd", '#22-03', 089109 ),
+(6, 'NOX - Dine in the Dark', 91234562,  '269 Beach Rd', '#14-21', 199546),
+(7, 'Ballisco', 91234563, "1 Cuscaden Rd, Level 2 Regent Singapore A Four Seasons Hotel", '#02-04', 249715 ),
+(8, 'Summer Pavilion', 91234564, "7 Raffles Ave", '#03-03', 039799 ),
+(9, 'Cheek By Jowl', 91234565,  '21 Boon Tat St', '#42-01', 069620),
+(10, 'Rhubarb', 91234566,  '3 Duxton Hill', '#112-01', 089589);
+>>>>>>> e2b2a5f5c5fe1374a2e701e0403ed3fa21879add
