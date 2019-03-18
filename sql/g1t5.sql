@@ -7,20 +7,33 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `user` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `user`;
 
+DROP TABLE IF EXISTS `address`;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `userid` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(16) NOT NULL,
   `fullname` char(25) NOT NULL,
   `hp` int(8) NOT NULL,
   `password` varchar(16) NOT NULL,
-  PRIMARY KEY (`userid`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`username`)
+)ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `user` (`userid`, `username`, `fullname`, `hp`, `password`) VALUES
-(NULL, 'shawnlee95', 'Shawn Lee Min Hwee', '98765432', 'apple123'),
-(NULL, 'lionelng96', 'Lionel Ng Ze Ji', '87654321', 'pear123'),
-(NULL, 'gohyuxin', 'Goh Yu Xin', '76543210', 'orange123');
+INSERT INTO `user` (`username`, `fullname`, `hp`, `password`) VALUES
+('shawnlee95', 'Shawn Lee Min Hwee', '98765432', 'apple123'),
+('lionelng96', 'Lionel Ng Ze Ji', '87654321', 'pear123'),
+('gohyuxin', 'Goh Yu Xin', '76543210', 'orange123');
+
+CREATE TABLE IF NOT EXISTS `address` (
+  `username` varchar(16) NOT NULL,
+  `address` varchar(64) NOT NULL,
+  `postalcode` varchar(6) NOT NULL,
+  PRIMARY KEY (`username`, `address`),
+  CONSTRAINT address_fk FOREIGN KEY (username)
+    REFERENCES user (username)
+)ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+INSERT INTO `address` (`username`, `address`, `postalcode`) VALUES
+('shawnlee95', '123 Clementi', '120123'),
+('shawnlee95', '222 Clementi', '120222');
 
 -- -----------------------------------------------------------------------------------------
 
@@ -31,7 +44,7 @@ DROP TABLE IF EXISTS `orderitems`;
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `orderid` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` int(11) NOT NULL,
+  `username` int(11) NOT NULL,
   `restaurantid` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT NOW(),
   `paymentid` int(11) NOT NULL,
@@ -47,10 +60,10 @@ CREATE TABLE IF NOT EXISTS `orderitems` (
         REFERENCES orders (orderid)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-INSERT INTO `orders` (`userid`, `restaurantid`, `date`, `paymentid`) VALUES
-(1, 3, '2019-03-16 12:55:00', 1),
-(1, 5, '2019-03-17 15:40:00', 2),
-(2, 1, '2019-03-17 15:55:00', 3);
+INSERT INTO `orders` (`username`, `restaurantid`, `date`, `paymentid`) VALUES
+('shawnlee95', 3, '2019-03-16 12:55:00', 1),
+('shawnlee95', 5, '2019-03-17 15:40:00', 2),
+('lionelng96', 1, '2019-03-17 15:55:00', 3);
 
 INSERT INTO `orderitems` (`orderid`, `itemid`, `quantity`) VALUES
 (1, 31, 1),
