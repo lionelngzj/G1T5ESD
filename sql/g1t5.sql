@@ -59,7 +59,7 @@ DROP TABLE IF EXISTS `orderitems`;
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `orderid` int(11) NOT NULL AUTO_INCREMENT,
-  `username` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
   `restaurantid` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT NOW(),
   `driver_username` varchar(16) DEFAULT NULL, 
@@ -76,10 +76,10 @@ CREATE TABLE IF NOT EXISTS `orderitems` (
         REFERENCES orders (orderid)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-INSERT INTO `orders` (`username`, `restaurantid`, `date`, `paymentid`) VALUES
-('shawnlee95', 3, '2019-03-16 12:55:00', 1),
-('shawnlee95', 5, '2019-03-17 15:40:00', 2),
-('lionelng96', 1, '2019-03-17 15:55:00', 3);
+INSERT INTO `orders` (`userid`, `restaurantid`, `date`, `paymentid`) VALUES
+(1, 3, '2019-03-16 12:55:00', 1),
+(1, 5, '2019-03-17 15:40:00', 2),
+(2, 1, '2019-03-17 15:55:00', 3);
 
 INSERT INTO `orderitems` (`orderid`, `itemid`, `quantity`) VALUES
 (1, 31, 1),
@@ -90,3 +90,28 @@ INSERT INTO `orderitems` (`orderid`, `itemid`, `quantity`) VALUES
 (3, 25, 1);
 
 -- -----------------------------------------------------------------------------------------
+
+CREATE DATABASE IF NOT EXISTS `restaurant` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `restaurant`;
+
+DROP TABLE IF EXISTS `restaurant_list`;
+CREATE TABLE IF NOT EXISTS `restaurant_list` (
+    `rid` int(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    `phone` int(11) NOT NULL,
+    `street` varchar(255) NOT NULL,
+    `unit_no` varchar(255) NOT NULL,
+    `postal_code` int(11) NOT NULL,
+    PRIMARY KEY (rid)
+    )
+DROP TABLE IF EXISTS `menuitems`;
+CREATE TABLE IF NOT EXISTS `menuitems` (
+    `rid` int(11) NOT NULL,
+    `fid` int(11) NOT NULL,
+    `name` varchar(255) NOT NULL,
+    `unit_price` float(11) NOT NULL,
+    `category` varchar(255) NOT NULL,
+    PRIMARY KEY (`rid`, `fid`),
+	CONSTRAINT menuitems_fk FOREIGN KEY (rid)
+        REFERENCES restaurant_list (rid)
+    )
