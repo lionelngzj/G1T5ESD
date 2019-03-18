@@ -4,12 +4,13 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 -- -----------------------------------------------------------------------------------------
-CREATE DATABASE IF NOT EXISTS `user` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+DROP DATABASE IF EXISTS `user`;
+CREATE DATABASE `user` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `user`;
 
 DROP TABLE IF EXISTS `address`;
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
+DROP TABLE IF EXISTS `consumer`;
+CREATE TABLE IF NOT EXISTS `consumer` (
   `username` varchar(16) NOT NULL,
   `fullname` char(25) NOT NULL,
   `hp` int(8) NOT NULL,
@@ -17,27 +18,41 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`username`)
 )ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `user` (`username`, `fullname`, `hp`, `password`) VALUES
+INSERT INTO `consumer` (`username`, `fullname`, `hp`, `password`) VALUES
 ('shawnlee95', 'Shawn Lee Min Hwee', '98765432', 'apple123'),
 ('lionelng96', 'Lionel Ng Ze Ji', '87654321', 'pear123'),
 ('gohyuxin', 'Goh Yu Xin', '76543210', 'orange123');
 
 CREATE TABLE IF NOT EXISTS `address` (
   `username` varchar(16) NOT NULL,
-  `address` varchar(64) NOT NULL,
+  `addressline` varchar(64) NOT NULL,
   `postalcode` varchar(6) NOT NULL,
-  PRIMARY KEY (`username`, `address`),
+  PRIMARY KEY (`username`, `addressline`),
   CONSTRAINT address_fk FOREIGN KEY (username)
-    REFERENCES user (username)
+    REFERENCES consumer (username)
 )ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `address` (`username`, `address`, `postalcode`) VALUES
+INSERT INTO `address` (`username`, `addressline`, `postalcode`) VALUES
 ('shawnlee95', '123 Clementi', '120123'),
-('shawnlee95', '222 Clementi', '120222');
+('shawnlee95', '222 Clementi Road', '120222');
+
+DROP TABLE IF EXISTS `drivers`;
+CREATE TABLE IF NOT EXISTS `drivers` (
+  `username` varchar(16) NOT NULL,
+  `fullname` char(25) NOT NULL,
+  `hp` int(8) NOT NULL,
+  `password` varchar(16) NOT NULL,
+  `wallet` float NOT NULL DEFAULT 0.0,
+  PRIMARY KEY (`username`)
+)ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+INSERT INTO `drivers` (`username`, `fullname`, `hp`, `password`) VALUES
+('ignatiusdriver', 'Ignatius Tan', 99998888,'iggy123'),
+('shawndriver', 'Shawn Lee', 88889999,'shawn123');
 
 -- -----------------------------------------------------------------------------------------
-
-CREATE DATABASE IF NOT EXISTS `foodorders` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+DROP DATABASE IF EXISTS `foodorders`;
+CREATE DATABASE `foodorders` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `foodorders`;
 
 DROP TABLE IF EXISTS `orderitems`;
@@ -47,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `username` int(11) NOT NULL,
   `restaurantid` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT NOW(),
+  `driver_username` varchar(16) DEFAULT NULL, 
   `paymentid` int(11) NOT NULL,
   PRIMARY KEY (`orderid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
