@@ -1,6 +1,7 @@
 <?php
   // Start the session
   session_start();
+  $_SESSION["serviceurl"] = "10.123.123.123";
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +44,7 @@
     $_SESSION["usertype"] = "guest";
     echo '<nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-              <a class="navbar-brand" href="index">BragDoof</a> hi
+              <a class="navbar-brand" href="index.php">BragDoof</a>
               <a class="btn btn-primary" href="#">Sign In</a>
            </div>
           </nav>';
