@@ -1,3 +1,8 @@
+<?php
+  // Start the session
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,14 +38,23 @@
 </head>
 
 <body>
-
+<?php
+  if (!isset($_SESSION["usertype"]) or $_SESSION["usertype"] == "guest") {
+    $_SESSION["usertype"] = "guest";
+    echo '<nav class="navbar navbar-light bg-light static-top">
+            <div class="container">
+              <a class="navbar-brand" href="index">BragDoof</a> hi
+              <a class="btn btn-primary" href="#">Sign In</a>
+           </div>
+          </nav>';
+  } elseif ($_SESSION["usertype"] == "driver"){
+    //DRIVER nav bar
+  } else {
+    //CONSUMER nav bar
+  } 
+?>
   <!-- Navigation -->
-  <nav class="navbar navbar-light bg-light static-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">BragDoof</a>
-      <a class="btn btn-primary" href="#">Sign In</a>
-    </div>
-  </nav>
+
 
   <!-- Masthead -->
   <header class="masthead text-white text-center" style="background-image: url('img/food_main.jpg')";>
