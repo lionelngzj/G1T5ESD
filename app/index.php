@@ -45,13 +45,27 @@
     echo '<nav class="navbar navbar-light bg-light static-top">
             <div class="container">
               <a class="navbar-brand" href="index.php">BragDoof</a>
-              <a class="btn btn-primary" href="#">Sign In</a>
+              <a class="btn btn-primary" href="login.php">Log In</a>
            </div>
           </nav>';
   } elseif ($_SESSION["usertype"] == "driver"){
-    //DRIVER nav bar
+    //DRIVER nav bar -- to be edited
+    echo '<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.php">BragDoof</a>
+      <h3>ConsumDriverer</h3>
+      <a class="btn btn-primary" href="logout.php">Log Out</a>
+    </div>
+    </nav>';
   } else {
-    //CONSUMER nav bar
+    //CONSUMER nav bar -- to be edited
+    echo '<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.php">BragDoof</a>
+      <h3>Consumer</h3>
+      <a class="btn btn-primary" href="logout.php">Log Out</a>
+    </div>
+    </nav>';
   } 
 ?>
   <!-- Navigation -->

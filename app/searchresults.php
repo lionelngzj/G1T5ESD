@@ -1,8 +1,8 @@
 <?php
   // Start the session
   session_start();
-  if (!isset($_SESSION["serviceurl"])) {
-
+  if (!isset($_GET["postal"])) {
+    header("Location: index.php", true, 301);
   }
 ?>
 <html>
@@ -52,8 +52,7 @@
             <thead>
                 <tr>
                     <th scope="col">Restaurant</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Ratings</th>
+                    <th scope="col">Address</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,11 +61,11 @@
         // $response = file_get_contents($_SESSION["serviceurl"] + '');
         // $restaurants = json_decode($response);
 
-        $restaurants = [["KFC", "Western", 4],["McDonald", "Western", 2], ["Tze Char", "Chinese", 5]];
+        $restaurants = [[1, "Odette", "1 St Andrew's Rd #01-04"],[2, "BAKALAKI Greek Taverna", "3 Seng Poh Rd #02-03"]];
         foreach ($restaurants as $restaurant) {
-            echo "<tr>";
-            foreach ($restaurant as $col)
-            echo "<td>{$col}</td>";
+            echo '<tr data-how="' . $restaurant[0] . '">';
+            echo "<td>{$restaurant[1]}</td>";
+            echo "<td>{$restaurant[2]}</td>";
             echo "</tr>";
         }
     ?>
@@ -75,5 +74,17 @@
     </div>
 
 </body>
+
+<script>
+    $('#table-restaurant td').click(function() {
+        var restaurantID = $(this).parent("tr").data('how');
+        alert($(this).parent("tr").data('how'));
+        window.open(("restaurant.php?" + "restaurant=" + restaurantID), '_blank');
+    });
+// <!-- 
+//     $(document).ready(function() {
+        
+//     }); -->
+</script>
 
 </html>
