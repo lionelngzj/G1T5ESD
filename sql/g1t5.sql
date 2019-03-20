@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `drivers` (
 
 INSERT INTO `drivers` (`username`, `fullname`, `hp`, `password`) VALUES
 ('ignatiusdriver', 'Ignatius Tan', 99998888,'iggy123'),
-('shawndriver', 'Shawn Lee', 88889999,'shawn123');
+('darrendriver', 'Darren Lim', 88889999,'darren123');
 
 -- -----------------------------------------------------------------------------------------
 DROP DATABASE IF EXISTS `foodorders`;
@@ -79,19 +79,23 @@ CREATE TABLE IF NOT EXISTS `orderitems` (
 INSERT INTO `orders` (`userid`, `restaurantid`, `date`, `paymentid`) VALUES
 (1, 3, '2019-03-16 12:55:00', 1),
 (1, 5, '2019-03-17 15:40:00', 2),
-(2, 1, '2019-03-17 15:55:00', 3);
+(1, 10, '2019-03-17 17:22:10', 2),
+(2, 1, '2019-03-18 11:32:03', 3);
 
 INSERT INTO `orderitems` (`orderid`, `itemid`, `quantity`) VALUES
-(1, 31, 1),
-(1, 32, 2),
+(1, 5, 1),
+(1, 2, 2),
+(2, 6, 3),
 (2, 1, 3),
-(2, 4, 3),
 (2, 7, 6),
-(3, 25, 1);
+(3, 3, 1),
+(4, 8, 4),
+(4, 5, 2);
 
 -- -----------------------------------------------------------------------------------------
 
-CREATE DATABASE IF NOT EXISTS `restaurant` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+DROP DATABASE IF EXISTS `restaurant`;
+CREATE DATABASE `restaurant` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `restaurant`;
 
 DROP TABLE IF EXISTS `restaurant_list`;
@@ -103,9 +107,9 @@ CREATE TABLE IF NOT EXISTS `restaurant_list` (
     `unit_no` varchar(255) NOT NULL,
     `postal_code` int(11) NOT NULL,
     PRIMARY KEY (rid)
-    )
+    );
 
-INSERT INTO restaurant_list (rid, name, phone, street, unit_no, postal_code) VALUES
+INSERT INTO `restaurant_list` (`rid`, `name`, `phone`, `street`, `unit_no`, `postal_code`) VALUES
 (1, 'Odette', 91234567, "1 St Andrew's Rd", '#01-04', 178957 ),
 (2, 'BAKALAKI Greek Taverna', 91234568, "3 Seng Poh Rd", '#02-03', 168891 ),
 (3, 'Jiang-Nan Chun', 91234569,  '190 Orchard Blvd', '#12-01', 248646),
@@ -128,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `menuitems` (
     PRIMARY KEY (`rid`, `fid`),
 	CONSTRAINT menuitems_fk FOREIGN KEY (rid)
         REFERENCES restaurant_list (rid)
-    )
+    );
 
 INSERT INTO `menuitems` (`rid`, `fid`, `name`, `unit_price`, `category`) VALUES
 (1, 1, "Eggs Benedict", 10.90, "Food"),
