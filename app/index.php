@@ -1,7 +1,7 @@
 <?php
   // Start the session
   session_start();
-  $_SESSION["serviceurl"] = "10.123.123.123";
+  $_SESSION["serviceurl"] = "10.124.138.100:8080";
 ?>
 
 <!DOCTYPE html>

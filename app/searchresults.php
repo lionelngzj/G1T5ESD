@@ -9,7 +9,7 @@
 <style>
     table#table-restaurant {
     border-collapse: collapse;   
-    }
+    }   
     #table-restaurant td:hover {
         cursor: pointer;
     }
@@ -81,10 +81,6 @@
         alert($(this).parent("tr").data('how'));
         window.open(("restaurant.php?" + "restaurant=" + restaurantID), '_blank');
     });
-// <!-- 
-//     $(document).ready(function() {
-        
-//     }); -->
 </script>
 
 </html>
