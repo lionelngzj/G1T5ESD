@@ -8,47 +8,37 @@ DROP DATABASE IF EXISTS `user`;
 CREATE DATABASE `user` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `user`;
 
-DROP TABLE IF EXISTS `address`;
 DROP TABLE IF EXISTS `consumer`;
 CREATE TABLE IF NOT EXISTS `consumer` (
   `username` varchar(16) NOT NULL,
   `fullname` char(25) NOT NULL,
   `hp` int(8) NOT NULL,
   `password` varchar(16) NOT NULL,
+  `driverwallet` float NOT NULL DEFAULT 0.0,
   PRIMARY KEY (`username`)
 )ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `consumer` (`username`, `fullname`, `hp`, `password`) VALUES
-('shawnlee95', 'Shawn Lee Min Hwee', '98765432', 'apple123'),
-('lionelng96', 'Lionel Ng Ze Ji', '87654321', 'pear123'),
-('gohyuxin', 'Goh Yu Xin', '76543210', 'orange123');
+INSERT INTO `consumer` (`username`, `fullname`, `hp`, `password`, `driverwallet`) VALUES
+('shawnlee95', 'Shawn Lee Min Hwee', '98765432', 'apple123', NULL),
+('lionelng96', 'Lionel Ng Ze Ji', '87654321', 'pear123', NULL),
+('gohyuxin', 'Goh Yu Xin', '76543210', 'orange123', NULL);
 
+DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `username` varchar(16) NOT NULL,
-  `addressline` varchar(64) NOT NULL,
-  `postalcode` varchar(6) NOT NULL,
-  PRIMARY KEY (`username`, `addressline`),
+  `address` varchar(64) NOT NULL,
+  `postalcode` int(6) NOT NULL,
+  PRIMARY KEY (`username`, `address`),
   CONSTRAINT address_fk FOREIGN KEY (username)
     REFERENCES consumer (username)
 )ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `address` (`username`, `addressline`, `postalcode`) VALUES
-('shawnlee95', '123 Clementi', '120123'),
-('shawnlee95', '222 Clementi Road', '120222');
+INSERT INTO `address` (`username`, `address`, `postalcode`) VALUES
+('shawnlee95', '2E Hong San Walk #12-05', '689051'),
+('lionelng96', 'Blk 512 Wellington Circle #02-18', '750512'),
+('gohyuxin', '11 Chai Chee Road', '460011'),
+('shawnlee95', '2E Hong San Walk #11-05', '689051');
 
-DROP TABLE IF EXISTS `drivers`;
-CREATE TABLE IF NOT EXISTS `drivers` (
-  `username` varchar(16) NOT NULL,
-  `fullname` char(25) NOT NULL,
-  `hp` int(8) NOT NULL,
-  `password` varchar(16) NOT NULL,
-  `wallet` float NOT NULL DEFAULT 0.0,
-  PRIMARY KEY (`username`)
-)ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
-INSERT INTO `drivers` (`username`, `fullname`, `hp`, `password`) VALUES
-('ignatiusdriver', 'Ignatius Tan', 99998888,'iggy123'),
-('darrendriver', 'Darren Lim', 88889999,'darren123');
 
 -- -----------------------------------------------------------------------------------------
 DROP DATABASE IF EXISTS `foodorders`;
