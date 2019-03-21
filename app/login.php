@@ -33,9 +33,9 @@
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 
-    <!-- Remind Passowrd -->
+    <!-- Register -->
     <div id="formFooter">
-      <a class="underlineHover" href="register.php">Register</a>
+      <a class="underlineHover" href="register.php">Sign Up!</a>
     </div>
 
   </div>
