@@ -8,8 +8,8 @@ DROP DATABASE IF EXISTS `user`;
 CREATE DATABASE `user` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `user`;
 
-DROP TABLE IF EXISTS `consumer`;
-CREATE TABLE IF NOT EXISTS `consumer` (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(16) NOT NULL,
   `fullname` char(25) NOT NULL,
   `hp` int(8) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `consumer` (
   PRIMARY KEY (`username`)
 )ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `consumer` (`username`, `fullname`, `hp`, `password`, `driverwallet`) VALUES
+INSERT INTO `user` (`username`, `fullname`, `hp`, `password`, `driverwallet`) VALUES
 ('shawnlee95', 'Shawn Lee Min Hwee', '98765432', 'apple123', NULL),
 ('lionelng96', 'Lionel Ng Ze Ji', '87654321', 'pear123', NULL),
 ('gohyuxin', 'Goh Yu Xin', '76543210', 'orange123', NULL);
