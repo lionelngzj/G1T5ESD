@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--Created with Liquid Studio 2018 (https://www.liquid-technologies.com)-->
 <xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="user">
+    <xs:element name="User">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="username" minOccurs="1" maxOccurs="1">
@@ -71,6 +71,47 @@
     <xs:element name="Login">
         <xs:complexType>
             <xs:sequence>
+                <xs:element name="fullname" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="64" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="email" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="64" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="hpnumber" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                            <xs:totalDigits value="11" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Register">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="16" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="password" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="16" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
                 <xs:element name="fullname" minOccurs="1" maxOccurs="1">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
