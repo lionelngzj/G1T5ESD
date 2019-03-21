@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   `username` varchar(16) NOT NULL,
   `streetunit` varchar(64) NOT NULL,
   `postalcode` int(6) NOT NULL,
-  PRIMARY KEY (`username`, `address`),
+  PRIMARY KEY (`username`, `streetunit`),
   CONSTRAINT address_fk FOREIGN KEY (username)
     REFERENCES user (username)
 )ENGINE=MyISAM DEFAULT CHARSET=latin1;
