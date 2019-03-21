@@ -22,9 +22,9 @@
     <!-- Tabs Titles -->
     <title>BragDoof</title>
     <!-- Icon -->
-    <!-- <div class="fadeIn first"> -->
+    <div class="fadeIn first">
       <img src="img/lunch.jpg" id="icon" alt="User Icon" />
-    <!-- </div> -->
+    </div>
 
     <!-- Login Form -->
     <form method="POST">
