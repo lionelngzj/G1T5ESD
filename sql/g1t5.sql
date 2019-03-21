@@ -27,14 +27,14 @@ INSERT INTO `user` (`username`, `password`, `fullname`, `email`, `hpnumber`, `dr
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `username` varchar(16) NOT NULL,
-  `address` varchar(64) NOT NULL,
+  `streetunit` varchar(64) NOT NULL,
   `postalcode` int(6) NOT NULL,
   PRIMARY KEY (`username`, `address`),
   CONSTRAINT address_fk FOREIGN KEY (username)
     REFERENCES user (username)
 )ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `address` (`username`, `address`, `postalcode`) VALUES
+INSERT INTO `address` (`username`, `streetunit`, `postalcode`) VALUES
 ('shawnlee95', '2E Hong San Walk #12-05', '689051'),
 ('lionelng96', 'Blk 512 Wellington Circle #02-18', '750512'),
 ('gohyuxin91', '11 Chai Chee Road', '460011'),
