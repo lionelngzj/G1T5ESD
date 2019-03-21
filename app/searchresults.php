@@ -8,7 +8,7 @@
 <html>
 <style>
     table#table-restaurant {
-    border-collapse: collapse;   
+        border-collapse: collapse;   
     }   
     #table-restaurant td:hover {
         cursor: pointer;

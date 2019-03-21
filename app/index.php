@@ -8,16 +8,15 @@
 <html lang="en">
 
 <style>
-    table#table-restaurant {
+  table#table-restaurant {
     border-collapse: collapse;   
-    }
-    #table-restaurant td:hover {
-        cursor: pointer;
-    }
+  }
+  #table-restaurant td:hover {
+    cursor: pointer;
+  }
 </style>
 
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -35,7 +34,6 @@
 
   <!-- Custom styles for this template -->
   <link href="css/landing-page.min.css" rel="stylesheet">
-
 </head>
 
 <body>

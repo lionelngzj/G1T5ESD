@@ -7,8 +7,6 @@
   session_start();
   if (isset($_POST["username"])) {
     $url = urlencode("http://" . "{$_SESSION["serviceurl"]}/login/{$_POST["username"]}&{$_POST["password"]}");
-    echo "$url<br>";
-    
     $handle = get_headers(urldecode($url), 1);
 
     if ($handle[0] == "HTTP/1.1 500 Internal Server Error") {
@@ -16,13 +14,9 @@
     } else {
       $response = file_get_contents(urldecode($url));
       $user = json_decode($response, true);
-      var_dump($user);
+      $_SESSION["name"] = $user["fullname"];
+      header("Location: user.php");
     }
-    // // $response = '{"username": "admin", "hp": 99998888}';    
-    // $_SESSION["usertype"] = "consumer";
-    // $_SESSION["username"] = $user["username"];
-    
-    // header("Location: index.php", true, 301);
   }
 ?>
 
