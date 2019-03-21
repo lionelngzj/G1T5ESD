@@ -38,6 +38,7 @@ INSERT INTO `address` (`username`, `address`, `postalcode`) VALUES
 ('lionelng96', 'Blk 512 Wellington Circle #02-18', '750512'),
 ('gohyuxin', '11 Chai Chee Road', '460011'),
 ('shawnlee95', '2E Hong San Walk #11-05', '689051');
+('lionelng96', '368 Thomson Road', '298127'),
 
 
 -- -----------------------------------------------------------------------------------------
