@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_vq56oEuqEemY7Yku9efk5A" targetNamespace="http://tns.tibco.com/bw/composite/user.module" name="user.module" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_Ali20EurEemY7Yku9efk5A" name="login" promote="ComponentProcess/login">
+    <sca:interface.wsdl xmi:id="_AlrZsEurEemY7Yku9efk5A" interface="http://xmlns.example.com/20190321145714PLT#wsdl.interface(login)" scaext:wsdlLocation="../Processes/user/module/Process.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_Al2Y0EurEemY7Yku9efk5A" name="RestService" path="/login/{username}&amp;{password}" docBasePath="http://localhost:7777/user.module" docResourcePath="Login" basePath="/" connector="user.module.Login" structuredData="true" technologyVersion="2.0">
+      <operation xmi:id="_Al7RUEurEemY7Yku9efk5A" operationName="get" nickname="get-login" httpMethod="GET" responseStyle="element" requestStyle="element">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_Am798EurEemY7Yku9efk5A">
+        <parameterMapping xmi:id="_Am8lAEurEemY7Yku9efk5A" parameterName="username" parameterType="Path" required="true"/>
+        <parameterMapping xmi:id="_Am8lAUurEemY7Yku9efk5A" parameterName="password" parameterType="Path" required="true"/>
+      </parameters>
+      <advancedConfig xmi:id="_Al5cIEurEemY7Yku9efk5A" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_Al7RUUurEemY7Yku9efk5A" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_wSxL4EuqEemY7Yku9efk5A" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wS_OUEuqEemY7Yku9efk5A" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wTEG0EuqEemY7Yku9efk5A" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wTI_UEuqEemY7Yku9efk5A" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wTN30EuqEemY7Yku9efk5A" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wTSJQEuqEemY7Yku9efk5A" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="_wTWasEuqEemY7Yku9efk5A" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_wCG5sEuqEemY7Yku9efk5A" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_wCHgwEuqEemY7Yku9efk5A" processName="user.module.Process"/>
+    <sca:service xmi:id="_AlcwMEurEemY7Yku9efk5A" name="login">
+      <sca:interface.wsdl xmi:id="_Ald-UEurEemY7Yku9efk5A" interface="http://xmlns.example.com/20190321145714PLT#wsdl.interface(login)" scaext:wsdlLocation="../Processes/user/module/Process.bwp"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>
