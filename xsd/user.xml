@@ -3,7 +3,21 @@
 <user xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\Users\SIS - Shawn Lee\Desktop\G1T5ESD\xsd\user.xsd">
 	<username>shawnlee95</username>
 	<password>shawnlee123</password>
-    	<fullname>Shawn Lee Min Hwee</fullname>
-    	<email>shawn.lee.2017@smu.edu.sg</email>
-    	<hpnumber>98765432</hpnumber>
+	<fullname>Shawn Lee Min Hwee</fullname>
+	<email>shawn.lee.2017@smu.edu.sg</email>
+	<hpnumber>98765432</hpnumber>
+    <addresses>
+        <address>
+            <street>Blk 123 Clementi</street>
+            <postal>120123</postal>
+        </address>
+        <address>
+            <street>Blk 123 Hougang</street>
+            <postal>888123</postal>
+        </address>
+        <address>
+            <street>Blk 999 Serangoon</street>
+            <postal>888999</postal>
+        </address>
+    </addresses>
 </user>
