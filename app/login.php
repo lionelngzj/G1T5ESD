@@ -15,7 +15,8 @@
       $response = file_get_contents(urldecode($url));
       $user = json_decode($response, true);
       $_SESSION["name"] = $user["fullname"];
-      header("Location: user.php");
+      $_SESSION["usertype"] = "user";
+      header("Location: index.php");
     }
   }
 ?>

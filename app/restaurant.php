@@ -1,10 +1,5 @@
-<?php
-  // Start the session
-  session_start();
-  if (!isset($_SESSION["name"])) {
-    header("Location: index.php");
-  }
-?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,20 +18,8 @@
 
   <!-- Custom styles for this template -->
   <link href="css/landing-page.min.css" rel="stylesheet">
+  <?php include 'header.php'; ?>
 </head>
+
 <body>
-  <nav class="navbar navbar-light bg-light static-top">
-    <div class="container">
-      <a class="navbar-brand" href="index.php">BragDoof</a>
-      <h3>Consumer</h3>
-      <a class="btn btn-primary" href="logout.php">Log Out</a>
-    </div>
-  </nav>
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Welcome</h1>
-      <p class="lead"><?php echo $_SESSION["name"];?></p>
-    </div>
-  </div>
-  
 </body>
