@@ -6,14 +6,6 @@
   }
 ?>
 <html>
-<style>
-    table#table-restaurant {
-        border-collapse: collapse;   
-    }   
-    #table-restaurant td:hover {
-        cursor: pointer;
-    }
-</style>
 
 <head>
     <title>BragDoof</title>
@@ -21,18 +13,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/search-page.css">
+
     <?php include 'header.php'; ?>
 </head>
 
 <body>
+<div class="banner1 banner2 align-middle">
+    <div class="py-2 LegacyBanner-c1d55d67f9fe06fd">
+        <h3>Food only for our Doofers</h3>
+        <p class="bannertext">Prepared with love by our partner restaurants.</p>
+    </div>
+</div>
+<br>
+<div style="margin-left: 20px;">
+
+</div>
   <!-- Call to Action -->
     <div class="container">
+    <h3 class="h3">Search result...</h3>
+    <p class="lead">
+    Currently at <?php echo $_GET["postal"];?></p>
         <div id="container-restaurants"></div>
         <table class="table table-hover" id="table-restaurant">
             <thead>
                 <tr>
                     <th scope="col">Restaurant</th>
                     <th scope="col">Address</th>
+                    <th scope="col">Distance</th>
                 </tr>
             </thead>
             <tbody>

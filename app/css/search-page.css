@@ -1,0 +1,14 @@
+table#table-restaurant {
+    border-collapse: collapse;
+}   
+
+#table-restaurant td:hover {
+    cursor: pointer;
+}
+
+.banner1.banner2, .banner1.LegacyBanner-370597bee360e474 {
+    background-color: #9b632f;
+    background-image: url(https://cwa.roocdn.com/_next/static/light.a43a5088.svg);
+    color: #fff;
+    text-align: center;
+}
