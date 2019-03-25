@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/search-page.css">
 
-    <?php include 'header.php'; ?>
+    <?php include 'header.php';     ?>
 </head>
 
 <body>
@@ -61,7 +61,6 @@
             </tbody>
         </table>
     </div>
-
 </body>
 
 <script>
