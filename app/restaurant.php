@@ -46,6 +46,7 @@
             <th scope="col">Dish</th>
             <th scope="col">Price</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Subtotal</th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +62,8 @@
             echo '<td style="float:right"><input type="checkbox"></td>';
             echo "<td>{$food[2]}</td>";
             echo "<td>{$food[3]}</td>";
-            echo '<td><input type="number" name="points" step="1" min="1" value="1"></td>';
+            echo '<td><input id="qty" type="number" name="points" step="1" min="0" value="0" onchange="calculateSubtotal(this.value)"></td>';
+            echo '<td id="subtotal"><span style="text-align: center" class="input-group-text">$0.00</span></td>';
             echo "</tr>";
         }
     ?>
@@ -72,7 +74,11 @@
 </body>
 <script src="./src/bootstrap-input-spinner.js"></script>
 <script>
-    $("input[type='number']").inputSpinner()
+  $("input[type='number']").inputSpinner()
+
+  function calculateSubtotal(val) {
+    //
+  }
 </script>
 <!-- <script>
     // $('#table-restaurant td').click(function() {
