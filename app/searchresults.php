@@ -66,7 +66,7 @@
 <script>
     $('#table-restaurant td').click(function() {
         var restaurantID = $(this).parent("tr").data('how');
-        window.open(("restaurant.php?" + "restaurant=" + restaurantID), '_blank');
+        window.location.href= ("restaurant.php?" + "restaurant=" + restaurantID);
     });
 </script>
 
