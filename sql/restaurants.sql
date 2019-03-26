@@ -1,35 +1,38 @@
-DROP DATABASE IF EXISTS `restaurants`;
-CREATE DATABASE `restaurants` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `restaurants`;
+DROP DATABASE IF EXISTS `restaurant`;
+CREATE DATABASE `restaurant` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `restaurant`;
 
 DROP TABLE IF EXISTS `restaurant`;
 CREATE TABLE IF NOT EXISTS `restaurant` (
-    `rid` int(5) NOT NULL AUTO_INCREMENT,
+    `rid` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(255) NOT NULL,
     `phone` int(11) NOT NULL,
-    `streetunit` varchar(255) NOT NULL,
-    `postal` int(6) NOT NULL,
+    `street` varchar(255) NOT NULL,
+    `unit_no` varchar(255) NOT NULL,
+    `postal_code` int(11) NOT NULL,
+    `restaurant_username` varchar(16) NOT NULL,
+    `restaurant_password` varchar(16) NOT NULL,
     PRIMARY KEY (rid)
     );
 
-INSERT INTO `restaurant` (`rid`, `name`, `phone`, `streetunit`, `postal`) VALUES
-(1, 'Odette', 91234567, "1 St Andrew's Rd #01-04", 178957),
-(2, 'BAKALAKI Greek Taverna', 91234568, '3 Seng Poh Rd #02-03', 168891),
-(3, 'Jiang-Nan Chun', 91234569,  '190 Orchard Blvd #12-01', 248646),
-(4, 'Colony', 91234560, '7 Raffles Ave, The Ritz-Carlton, Millenia Singapore #01-14', 039799),
-(5, 'Meta Restaurant', 91234561, '1 Keong Saik Rd #22-03', 089109),
-(6, 'NOX - Dine in the Dark', 91234562,  '269 Beach Rd #14-21', 199546),
-(7, 'Ballisco', 91234563, '1 Cuscaden Rd, Level 2 Regent Singapore A Four Seasons Hotel #02-04', 249715),
-(8, 'Summer Pavilion', 91234564, '7 Raffles Ave #03-03', 039799),
-(9, 'Cheek By Jowl', 91234565,  '21 Boon Tat St #42-01', 069620),
-(10, 'Rhubarb', 91234566,  '3 Duxton Hill #112-01', 089589);
-
+INSERT INTO `restaurant` (`rid`, `name`, `phone`, `street`, `unit_no`, `postal_code`, `restaurant_username`, `restaurant_password`) VALUES
+(1, 'Odette', 91234567, "1 St Andrew's Rd", '#01-04', 178957, 'odette','123'),
+(2, 'BAKALAKI Greek Taverna', 91234568, "3 Seng Poh Rd", '#02-03', 168891, 'bakalaki','123'),
+(3, 'Jiang-Nan Chun', 91234569,  '190 Orchard Blvd', '#12-01', 248646, 'jiangnan','123'),
+(4, 'Colony', 91234560, "7 Raffles Ave, The Ritz-Carlton, Millenia Singapore", '#01-14', 039799, 'colony','123'),
+(5, 'Meta Restaurant', 91234561, "1 Keong Saik Rd", '#22-03', 089109, 'meta','123'),
+(6, 'NOX - Dine in the Dark', 91234562,  '269 Beach Rd', '#14-21', 199546, 'nox','123'),
+(7, 'Ballisco', 91234563, "1 Cuscaden Rd, Level 2 Regent Singapore A Four Seasons Hotel", '#02-04', 249715, 'ballisco','123'),
+(8, 'Summer Pavilion', 91234564, "7 Raffles Ave", '#03-03', 039799, 'summer','123'),
+(9, 'Cheek By Jowl', 91234565,  '21 Boon Tat St', '#42-01', 069620, 'cheek','123'),
+(10, 'Rhubarb', 91234566,  '3 Duxton Hill', '#112-01', 089589, 'rhubarb','123');
+	
 
 DROP TABLE IF EXISTS `menuitems`;
 CREATE TABLE IF NOT EXISTS `menuitems` (
-    `rid` int(5) NOT NULL,
-    `fid` int(5) NOT NULL,
-    `name` varchar(64) NOT NULL,
+    `rid` int(11) NOT NULL,
+    `fid` int(11) NOT NULL,
+    `name` varchar(255) NOT NULL,
     `unit_price` float(11) NOT NULL,
     `category` varchar(255) NOT NULL,
     PRIMARY KEY (`rid`, `fid`),

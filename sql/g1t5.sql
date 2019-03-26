@@ -15,31 +15,31 @@ CREATE TABLE IF NOT EXISTS `user` (
   `fullname` char(64) NOT NULL,
   `email` varchar(64) NOT NULL,
   `hpnumber` int(11) NOT NULL,
-  `driverwallet` float NOT NULL DEFAULT 0.0,
   PRIMARY KEY (`username`)
 )ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `user` (`username`, `password`, `fullname`, `email`, `hpnumber`, `driverwallet`) VALUES
-('shawnlee95', 'shawnlee123', 'Shawn Lee Min Hwee', 'shawn.lee.2017@smu.edu.sg', 98765432, NULL),
-('lionelng96', 'lionelng123', 'Lionel Ng Ze Ji', 'lionel.ng.2017@smu.edu.sg', 87654321, NULL),
-('gohyuxin91', 'gohyuxin123', 'Goh Yu Xin', 'yuxin.goh.2017@smu.edu.sg', 76543210, NULL);
+INSERT INTO `user` (`username`, `password`, `fullname`, `email`, `hpnumber`) VALUES
+('shawnlee95', 'shawnlee123', 'Shawn Lee Min Hwee', 'shawn.lee.2017@smu.edu.sg', 98765432),
+('lionelng96', 'lionelng123', 'Lionel Ng Ze Ji', 'lionel.ng.2017@smu.edu.sg', 87654321),
+('yuxin', '123', 'Goh Yu Xin', 'yuxin.goh.2017@smu.edu.sg', 76543210);
 
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `username` varchar(16) NOT NULL,
-  `streetunit` varchar(64) NOT NULL,
-  `postalcode` int(6) NOT NULL,
-  PRIMARY KEY (`username`, `streetunit`),
+  `street` varchar(64) NOT NULL,
+  `unit` varchar(64) NOT NULL,
+  `postalcode` int(6),
+  PRIMARY KEY (`username`, `street`,`unit`),
   CONSTRAINT address_fk FOREIGN KEY (username)
     REFERENCES user (username)
 )ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `address` (`username`, `streetunit`, `postalcode`) VALUES
-('shawnlee95', '2E Hong San Walk #12-05', '689051'),
-('lionelng96', 'Blk 512 Wellington Circle #02-18', '750512'),
-('gohyuxin91', '11 Chai Chee Road', '460011'),
-('shawnlee95', '2E Hong San Walk #11-05', '689051'),
-('lionelng96', '368 Thomson Road', '298127');
+INSERT INTO `address` (`username`, `street`, `unit`, `postalcode`) VALUES
+('shawnlee95', '2E Hong San Walk', '#12-05', '689051'),
+('lionelng96', 'Blk 512 Wellington Circle', '#02-18', '750512'),
+('yuxin', '11 Chai Chee Road', NULL,'460011'),
+('shawnlee95', '2E Hong San Walk', '#11-05', '689051'),
+('lionelng96', '368 Thomson Road', NULL, '298127');
 
 -- -----------------------------------------------------------------------------------------
 DROP DATABASE IF EXISTS `foodorders`;
@@ -50,11 +50,11 @@ DROP TABLE IF EXISTS `orderitems`;
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `orderid` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` int(11) NOT NULL,
+  `username` varchar(16) NOT NULL,
   `restaurantid` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT NOW(),
-  `driver_username` varchar(16) DEFAULT NULL, 
-  `paymentid` int(11) NOT NULL,
+  `paymentreceipt` varchar(68) NOT NULL,
+  `total_amount` float NOT NULL,
   PRIMARY KEY (`orderid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
@@ -67,21 +67,20 @@ CREATE TABLE IF NOT EXISTS `orderitems` (
         REFERENCES orders (orderid)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-INSERT INTO `orders` (`userid`, `restaurantid`, `date`, `paymentid`) VALUES
-(1, 3, '2019-03-16 12:55:00', 1),
-(1, 5, '2019-03-17 15:40:00', 2),
-(1, 10, '2019-03-17 17:22:10', 2),
-(2, 1, '2019-03-18 11:32:03', 3);
+INSERT INTO `orders` (`username`, `restaurantid`, `date`, `paymentreceipt`, `total_amount`) VALUES
+('shawnlee95', 1, '2019-03-16 12:55:00', '#1777-6432', 109.00),
+('yuxin', 2, '2019-03-17 15:40:00', '#1777-6433', 13.00),
+('lionelng96', 1, '2019-03-17 17:22:10', '#1777-6434', 23.4),
+('yuxin', 1, '2019-03-18 11:32:03', '#1777-6435', 18.3);
 
 INSERT INTO `orderitems` (`orderid`, `itemid`, `quantity`) VALUES
-(1, 5, 1),
-(1, 2, 2),
-(2, 6, 3),
-(2, 1, 3),
-(2, 7, 6),
-(3, 3, 1),
-(4, 8, 4),
-(4, 5, 2);
+(1, 1, 10),
+(2, 1, 1),
+(2, 2, 1),
+(3, 7, 6),
+(4, 4, 1),
+(4, 5, 1),
+(4, 6, 1);
 
 -- -----------------------------------------------------------------------------------------
 
@@ -89,29 +88,31 @@ DROP DATABASE IF EXISTS `restaurant`;
 CREATE DATABASE `restaurant` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `restaurant`;
 
-DROP TABLE IF EXISTS `restaurant_list`;
-CREATE TABLE IF NOT EXISTS `restaurant_list` (
+DROP TABLE IF EXISTS `restaurant`;
+CREATE TABLE IF NOT EXISTS `restaurant` (
     `rid` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(255) NOT NULL,
     `phone` int(11) NOT NULL,
     `street` varchar(255) NOT NULL,
     `unit_no` varchar(255) NOT NULL,
     `postal_code` int(11) NOT NULL,
+    `restaurant_username` varchar(16) NOT NULL,
+    `restaurant_password` varchar(16) NOT NULL,
     PRIMARY KEY (rid)
     );
 
-INSERT INTO `restaurant_list` (`rid`, `name`, `phone`, `street`, `unit_no`, `postal_code`) VALUES
-(1, 'Odette', 91234567, "1 St Andrew's Rd", '#01-04', 178957 ),
-(2, 'BAKALAKI Greek Taverna', 91234568, "3 Seng Poh Rd", '#02-03', 168891 ),
-(3, 'Jiang-Nan Chun', 91234569,  '190 Orchard Blvd', '#12-01', 248646),
-(4, 'Colony', 91234560, "7 Raffles Ave, The Ritz-Carlton, Millenia Singapore", '#01-14', 039799 ),
-(5, 'Meta Restaurant', 91234561, "1 Keong Saik Rd", '#22-03', 089109 ),
-(6, 'NOX - Dine in the Dark', 91234562,  '269 Beach Rd', '#14-21', 199546),
-(7, 'Ballisco', 91234563, "1 Cuscaden Rd, Level 2 Regent Singapore A Four Seasons Hotel", '#02-04', 249715 ),
-(8, 'Summer Pavilion', 91234564, "7 Raffles Ave", '#03-03', 039799 ),
-(9, 'Cheek By Jowl', 91234565,  '21 Boon Tat St', '#42-01', 069620),
-(10, 'Rhubarb', 91234566,  '3 Duxton Hill', '#112-01', 089589);
-
+INSERT INTO `restaurant` (`rid`, `name`, `phone`, `street`, `unit_no`, `postal_code`, `restaurant_username`, `restaurant_password`) VALUES
+(1, 'Odette', 91234567, "1 St Andrew's Rd", '#01-04', 178957, 'odette','123'),
+(2, 'BAKALAKI Greek Taverna', 91234568, "3 Seng Poh Rd", '#02-03', 168891, 'bakalaki','123'),
+(3, 'Jiang-Nan Chun', 91234569,  '190 Orchard Blvd', '#12-01', 248646, 'jiangnan','123'),
+(4, 'Colony', 91234560, "7 Raffles Ave, The Ritz-Carlton, Millenia Singapore", '#01-14', 039799, 'colony','123'),
+(5, 'Meta Restaurant', 91234561, "1 Keong Saik Rd", '#22-03', 089109, 'meta','123'),
+(6, 'NOX - Dine in the Dark', 91234562,  '269 Beach Rd', '#14-21', 199546, 'nox','123'),
+(7, 'Ballisco', 91234563, "1 Cuscaden Rd, Level 2 Regent Singapore A Four Seasons Hotel", '#02-04', 249715, 'ballisco','123'),
+(8, 'Summer Pavilion', 91234564, "7 Raffles Ave", '#03-03', 039799, 'summer','123'),
+(9, 'Cheek By Jowl', 91234565,  '21 Boon Tat St', '#42-01', 069620, 'cheek','123'),
+(10, 'Rhubarb', 91234566,  '3 Duxton Hill', '#112-01', 089589, 'rhubarb','123');
+	
 
 DROP TABLE IF EXISTS `menuitems`;
 CREATE TABLE IF NOT EXISTS `menuitems` (
@@ -122,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `menuitems` (
     `category` varchar(255) NOT NULL,
     PRIMARY KEY (`rid`, `fid`),
 	CONSTRAINT menuitems_fk FOREIGN KEY (rid)
-        REFERENCES restaurant_list (rid)
+        REFERENCES restaurant (rid)
     );
 
 INSERT INTO `menuitems` (`rid`, `fid`, `name`, `unit_price`, `category`) VALUES
