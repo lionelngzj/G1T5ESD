@@ -82,14 +82,14 @@
     var target = $(this).data('target')
     var quantity = $(this).val()
     
-    var total = amount * quantity
+    var total = parseFloat(amount * quantity).toFixed(2);
     
     $(target).html(`$${total}`)
   })
 
-  function setTwoNumberDecimal(event) {
+   $('.input-group-text').on('change', function() {
     this.value = parseFloat(this.value).toFixed(2);
-  }
+  })
 
   $("input[type='number']").inputSpinner()
 </script>
