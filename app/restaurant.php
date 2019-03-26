@@ -44,7 +44,7 @@
           <tr>
             <th scope="col"></th>
             <th scope="col">Dish</th>
-            <th scope="col">Price</th>
+            <th scope="col">Price ($)</th>
             <th scope="col">Quantity</th>
             <th scope="col">Subtotal</th>
           </tr>
@@ -62,29 +62,36 @@
             echo '<td style="float:right"><input type="checkbox"></td>';
             echo "<td>{$food[2]}</td>";
             echo "<td>{$food[3]}</td>";
-            echo '<td><input id="qty" type="number" name="points" step="1" min="0" value="0" onchange="calculateSubtotal(this.value)"></td>';
-            echo '<td id="subtotal"><span style="text-align: center" class="input-group-text">$0.00</span></td>';
+            echo '<td><input class="qty-input" type="number" data-target="#subtotal-' . $food[1] . '" name="points" step="1" min="0" value="0" data-amount="' . $food[3] . '"></td>';
+            echo '<td><span style="text-align: center" class="input-group-text" id="subtotal-' . $food[1] . '">$0.00</span></td>';
             echo "</tr>";
         }
     ?>
           </tbody>
       </table>
+      <br>
+      <span style="text-align: center; float: right;" class="input-group-text">$0.00</span>
+      <br>
       <button style="float:right" type="button" class="btn btn-success" <?php if (!isset($_SESSION["username"])) {echo "disabled";}?>>Check Out</button>
   </div>
 </body>
 <script src="./src/bootstrap-input-spinner.js"></script>
 <script>
-  $("input[type='number']").inputSpinner()
+  $('.qty-input').on('change', function() {
+    var amount = $(this).data('amount')
+    var target = $(this).data('target')
+    var quantity = $(this).val()
+    
+    var total = amount * quantity
+    
+    $(target).html(`$${total}`)
+  })
 
-  function calculateSubtotal(val) {
-    //
+  function setTwoNumberDecimal(event) {
+    this.value = parseFloat(this.value).toFixed(2);
   }
+
+  $("input[type='number']").inputSpinner()
 </script>
-<!-- <script>
-    // $('#table-restaurant td').click(function() {
-    //     var restaurantID = $(this).parent("tr").data('how');
-    //     window.open(("restaurant.php?" + "restaurant=" + restaurantID), '_blank');
-    // });
-</script> -->
 
 </html>
