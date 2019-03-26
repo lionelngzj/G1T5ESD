@@ -28,7 +28,7 @@
             echo $restaurant[1];
           ?>
         </h3>
-        <p class="bannertext" id="address"><?php echo ($restaurant[3] . $restaurant[4]);?></p>
+        <p class="bannertext" id="address"><?php echo ($restaurant[3] . " " . $restaurant[4]);?></p>
     </div>
 </div>
 <br>
@@ -93,7 +93,7 @@
     // var before = target.val();
     // var difference = total - before;
     // alert(difference);
-
+    $(target).html(`$${total}`)
     $(target).html(`$${total}`)
   })
 
