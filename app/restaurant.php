@@ -44,7 +44,7 @@
           <tr>
             <th scope="col"></th>
             <th scope="col">Dish</th>
-            <th scope="col">Price ($)</th>
+            <th scope="col">Price</th>
             <th scope="col">Quantity</th>
             <th scope="col">Subtotal</th>
           </tr>
@@ -61,7 +61,7 @@
             echo '<tr data-how="' .$food[1] . '">';
             echo '<td style="float:right"><input type="checkbox"></td>';
             echo "<td>{$food[2]}</td>";
-            echo "<td>{$food[3]}</td>";
+            echo "<td>$" . number_format((float)$food[3], 2, '.', '') ."</td>";
             echo '<td><input class="qty-input" type="number" data-target="#subtotal-' . $food[1] . '" name="points" step="1" min="0" value="0" data-amount="' . $food[3] . '"></td>';
             echo '<td><span style="text-align: center" class="input-group-text" id="subtotal-' . $food[1] . '">$0.00</span></td>';
             echo "</tr>";
@@ -70,10 +70,16 @@
           </tbody>
       </table>
       <br>
-      <span style="text-align: center; float: right;" class="input-group-text">$0.00</span>
-      <br>
-      <button style="float:right" type="button" class="btn btn-success" <?php if (!isset($_SESSION["username"])) {echo "disabled";}?>>Check Out</button>
-  </div>
+      <hr>
+        <div style="float:right" class="checkout">
+          <p class="lead" >Total amount payable:</p><span style="text-align: center" class="input-group-text" id="total">$0.00</span>
+          <?php
+          if (!isset($_SESSION["name"]))
+            echo '<br><span class="badge badge-warning">Please login to start ordering</span>';
+          ?>
+          <button style="float:right; margin-top:10px; margin-bottom:10px;" type="button" class="btn btn-success" <?php if (!isset($_SESSION["username"])) {echo "disabled";}?>>Check Out</button>
+        </div>
+</div>
 </body>
 <script src="./src/bootstrap-input-spinner.js"></script>
 <script>
@@ -81,9 +87,13 @@
     var amount = $(this).data('amount')
     var target = $(this).data('target')
     var quantity = $(this).val()
-    
+
     var total = parseFloat(amount * quantity).toFixed(2);
     
+    // var before = target.val();
+    // var difference = total - before;
+    // alert(difference);
+
     $(target).html(`$${total}`)
   })
 
