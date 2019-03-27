@@ -30,9 +30,9 @@ INSERT INTO `orders` (`username`, `rid`, `date`, `status`,`paymentreceipt`, `tot
 DROP TABLE IF EXISTS `orderitems`;
 CREATE TABLE IF NOT EXISTS `orderitems` (
   `orderid` int(11) NOT NULL,
-  `itemid` int(11) NOT NULL,
+  `fid` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  PRIMARY KEY (`orderid`, `itemid`),
+  PRIMARY KEY (`orderid`, `fid`),
 	CONSTRAINT orderitems_fk FOREIGN KEY (orderid)
         REFERENCES orders (orderid)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
