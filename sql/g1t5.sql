@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `username` varchar(16) NOT NULL,
   `street` varchar(64) NOT NULL,
-  `unit` varchar(64) NOT NULL,
+  `unit` varchar(64),
   `postalcode` int(6),
   PRIMARY KEY (`username`, `street`,`unit`),
   CONSTRAINT address_fk FOREIGN KEY (username)
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
     `name` varchar(255) NOT NULL,
     `phone` int(11) NOT NULL,
     `street` varchar(255) NOT NULL,
-    `unit_no` varchar(255) NOT NULL,
+    `unit_no` varchar(255),
     `postal_code` int(11) NOT NULL,
     `restaurant_username` varchar(16) NOT NULL,
     `restaurant_password` varchar(16) NOT NULL,
