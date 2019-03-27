@@ -21,8 +21,8 @@ DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `username` varchar(16) NOT NULL,
   `street` varchar(64) NOT NULL,
-  `unit` varchar(64) NOT NULL,
-  `postalcode` int(6),
+  `unit` varchar(64),
+  `postalcode` int(6) NOT NULL,
   PRIMARY KEY (`username`, `street`,`unit`),
   CONSTRAINT address_fk FOREIGN KEY (username)
     REFERENCES user (username)

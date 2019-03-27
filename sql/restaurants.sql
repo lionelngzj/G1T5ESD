@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
     `name` varchar(255) NOT NULL,
     `phone` int(11) NOT NULL,
     `street` varchar(255) NOT NULL,
-    `unit_no` varchar(255) NOT NULL,
+    `unit_no` varchar(255),
     `postal_code` int(11) NOT NULL,
     `restaurant_username` varchar(16) NOT NULL,
     `restaurant_password` varchar(16) NOT NULL,
