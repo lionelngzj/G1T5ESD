@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--Created with Liquid Studio 2018 (https://www.liquid-technologies.com)-->
-<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="chat_id" type="xs:string" />
-    <xs:element name="text" type="xs:string" />
-</xs:schema>
+<schema xmlns:tns="qualified" elementFormDefault="qualified" targetNamespace="qualified" xmlns="http://www.w3.org/2001/XMLSchema">
+    <complexType name="message">
+        <sequence>
+            <element name="chat_id" type="string" />
+            <element name="message" type="string" />
+        </sequence>
+    </complexType>
+    <complexType name="messages">
+        <sequence>
+            <element name="messages" type="tns:message" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <element name="message" type="tns:message"/>
+</schema>
