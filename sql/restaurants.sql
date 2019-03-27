@@ -21,7 +21,7 @@ INSERT INTO `restaurant` (`rid`, `name`, `phone`, `street`, `unit_no`, `postal_c
 (3, 'Jiang-Nan Chun', 91234569,  '190 Orchard Blvd', '#12-01', 248646, 'jiangnan','123'),
 (4, 'Colony', 91234560, "7 Raffles Ave, The Ritz-Carlton, Millenia Singapore", '#01-14', 039799, 'colony','123'),
 (5, 'Meta Restaurant', 91234561, "1 Keong Saik Rd", '#22-03', 089109, 'meta','123'),
-(6, 'NOX - Dine in the Dark', 91234562,  '80 stamford road', '#04-21', 199546, 'nox','123'),
+(6, 'NOX - Dine in the Dark', 91234562,  '80 Stamford Road, Singapore', '#04-21', 199546, 'nox','123'),
 (7, 'Ballisco', 91234563, "1 Cuscaden Rd, Level 2 Regent Singapore A Four Seasons Hotel", '#02-04', 249715, 'ballisco','123'),
 (8, 'Summer Pavilion', 91234564, "7 Raffles Ave", '#03-03', 039799, 'summer','123'),
 (9, 'Cheek By Jowl', 91234565,  '21 Boon Tat St', '#42-01', 069620, 'cheek','123'),
