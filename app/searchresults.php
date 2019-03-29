@@ -4,6 +4,7 @@
   if (!isset($_GET["postal"])) {
     header("Location: index.php", true, 301);
   }
+     
 ?>
 <html>
 
@@ -47,15 +48,29 @@
             <tbody>
     <?php
         $postalcode = $_GET["postal"];
-        // $response = file_get_contents($_SESSION["serviceurl"] + '');
-        // $restaurants = json_decode($response);
+        $link = "http://" . $_SESSION['serviceurl'] . "/restaurants/Singapore%20" . ($_GET['postal']) . "&AIzaSyABsb0wlw9itDK8XGaWz2hoCeXmg0pb7ww";
+        $url = urlencode($link);
+        $handle = get_headers(urldecode($url), 1);
+    
+        if ($handle[0] == "HTTP/1.1 500 Internal Server Error") {
+            echo "error";
+      } else {
+            $response = file_get_contents(urldecode($url));
+            $response = json_decode($response, true);
+            $restaurants = $response["restaurants"];
+            $length = count($restaurants);
+            for($i=0;$i<$length;$i++) {
+                $rid = $restaurants[$i]['rid'];
+                $name = $restaurants[$i]['name'];
+                $dist = $restaurants[$i]['distance'];
+                $add = $restaurants[$i]['street'];
+                echo '<tr data-how="' . $rid . '">';
+                echo '<td>' . $name . '</td>';
+                echo '<td>' . $add . '</td>';
+                echo '<td>' . $dist . '</td>';
+                echo "</tr>";    
+            }
 
-        $restaurants = [[1, "Odette", "1 St Andrew's Rd #01-04"],[2, "BAKALAKI Greek Taverna", "3 Seng Poh Rd #02-03"]];
-        foreach ($restaurants as $restaurant) {
-            echo '<tr data-how="' . $restaurant[0] . '">';
-            echo "<td>{$restaurant[1]}</td>";
-            echo "<td>{$restaurant[2]}</td>";
-            echo "</tr>";
         }
     ?>
             </tbody>
