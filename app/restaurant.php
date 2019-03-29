@@ -20,15 +20,26 @@
 <div class="banner1 banner2 align-middle">
     <div class="py-2 LegacyBanner-c1d55d67f9fe06fd">
         <h3 id="rest-name">
-          <?php
+        <?php
             $restaurantID = $_GET["restaurant"];
-            // $response = file_get_contents($_SESSION["serviceurl"] + '');
-            // $restaurant = json_decode($response);
-            $restaurant = [1, "Odette", 91234567,"1 St Andrew's Rd", '#01-04', 178957];
-            echo $restaurant[1];
+            $linkl = "http://" . $_SESSION['serviceurl'] . "/restaurant" . "?rid=" .  $restaurantID;
+            $urll = urlencode($linkl);
+            $handle = get_headers(urldecode($urll), 1);
+        
+            if ($handle[0] == "HTTP/1.1 500 Internal Server Error") {
+                echo "error";
+          } else {
+                $response = file_get_contents(urldecode($urll));
+                $response = json_decode($response, true);
+                $restaurants = $response;
+                $rid = $restaurants['rid'];
+                $name = $restaurants['name'];
+                $add = $restaurants['street'];
+                echo $name;
+            }  
           ?>
         </h3>
-        <p class="bannertext" id="address"><?php echo ($restaurant[3] . " " . $restaurant[4]);?></p>
+        <p class="bannertext" id="address"><?php echo ($add . " " . $restaurants['unit']);?></p>
     </div>
 </div>
 <br>
@@ -50,22 +61,33 @@
           </tr>
         </thead>
         <tbody>
-    <?php
-        
-        // $response = file_get_contents($_SESSION["serviceurl"] + '');
-        // $menu = json_decode($response);
-
-        $menu = [[1, 1, "Eggs Benedict", 10.90, "Food"],[1, 2, "Club Sandwich", 7.90, "Food"],[1, 3, "Cheesy Omelette", 8.90, "Food"],[1, 4, "Milk Toast", 5.50, "Food"]];
-        
-        foreach ($menu as $food) {
-            echo '<tr data-how="' .$food[1] . '">';
-            echo '<td style="float:right"><input type="checkbox"></td>';
-            echo "<td>{$food[2]}</td>";
-            echo "<td>$" . number_format((float)$food[3], 2, '.', '') ."</td>";
-            echo '<td><input class="qty-input" type="number" data-target="#subtotal-' . $food[1] . '" name="points" step="1" min="0" value="0" data-amount="' . $food[3] . '"></td>';
-            echo '<td><span style="text-align: center" class="input-group-text" id="subtotal-' . $food[1] . '">$0.00</span></td>';
-            echo "</tr>";
-        }
+        <?php
+            $restaurantID = $_GET["restaurant"];
+            $link = "http://" . $_SESSION['serviceurl'] . "/menu" . "/" .  $restaurantID;
+            $url = urlencode($link);
+            $handle = get_headers(urldecode($url), 1);
+            if ($handle[0] == "HTTP/1.1 500 Internal Server Error") {
+              echo "error";
+        } else {
+              $response = file_get_contents(urldecode($url));
+              $response = json_decode($response, true);
+              $menu = $response['menus'];
+              $length = count($menu);
+              for($i=0;$i<$length;$i++) {
+                  $rid = $menu[$i]['rid'];
+                  $fid = $menu[$i]['fid'];
+                  $name = $menu[$i]['name'];
+                  $price = $menu[$i]['unit_price'];
+                  echo '<tr data-how="' . $fid . '">';
+                  echo '<td style="float:right"><input type="checkbox"></td>';
+                  echo '<td>' . $name . '</td>';
+                  echo "<td>$" . number_format((float)$price, 2, '.', '') ."</td>";
+                  echo '<td><input class="qty-input" type="number" data-target="#subtotal-' . $fid . '" name="points" step="1" min="0" value="0" data-amount="' . $price . '"></td>';
+                  echo '<td><span style="text-align: center" class="input-group-text" id="subtotal-' . $fid . '">$0.00</span></td>';
+                  echo "</tr>";    
+              }
+  
+          }
     ?>
           </tbody>
       </table>
