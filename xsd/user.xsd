@@ -42,4 +42,32 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <!-- Created with Liquid Studio 2018 (https://www.liquid-technologies.com) -->
+    <xs:element name="Notification">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="telegramid" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                            <xs:totalDigits value="16" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="email" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="64" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="hpnumber" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                            <xs:totalDigits value="11" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>
