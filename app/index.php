@@ -1,7 +1,7 @@
 <?php
   // Start the session
   session_start();
-  $_SESSION["serviceurl"] = "DESKTOP-GCHVM5D:8080";
+  $_SESSION["serviceurl"] = "10.124.138.100";
 ?>
 
 <!DOCTYPE html>

@@ -22,7 +22,7 @@
         <h3 id="rest-name">
         <?php
             $restaurantID = $_GET["restaurant"];
-            $linkl = "http://" . $_SESSION['serviceurl'] . "/restaurant" . "?rid=" .  $restaurantID;
+            $linkl = "http://" . $_SESSION['serviceurl'] . ":8080/restaurant" . "?rid=" .  $restaurantID;
             $urll = urlencode($linkl);
             $handle = get_headers(urldecode($urll), 1);
         
@@ -47,7 +47,15 @@
 
 </div>
   <!-- Call to Action -->
+    <?php print_r($_POST) ?>
     <div class="container">
+    <form method="POST">
+      <input name="item[20]" value="2">
+      <input name="item[10]" value="3">
+      <button style="float:right; margin-top:10px; margin-bottom:10px;" type="submit" class="btn btn-success" >Check Out</button>
+
+    </form>
+
     <p class="lead">Menu</p>
       <div id="container-restaurants"></div>
       <table class="table table-hover" id="table-restaurant">
@@ -63,7 +71,7 @@
         <tbody>
         <?php
             $restaurantID = $_GET["restaurant"];
-            $link = "http://" . $_SESSION['serviceurl'] . "/menu" . "/" .  $restaurantID;
+            $link = "http://" . $_SESSION['serviceurl'] . ":8080/menu" . "/" .  $restaurantID;
             $url = urlencode($link);
             $handle = get_headers(urldecode($url), 1);
             if ($handle[0] == "HTTP/1.1 500 Internal Server Error") {
@@ -82,8 +90,8 @@
                   echo '<td style="float:right"><input type="checkbox"></td>';
                   echo '<td>' . $name . '</td>';
                   echo "<td>$" . number_format((float)$price, 2, '.', '') ."</td>";
-                  echo '<td><input class="qty-input" type="number" data-target="#subtotal-' . $fid . '" name="points" step="1" min="0" value="0" data-amount="' . $price . '"></td>';
-                  echo '<td><span style="text-align: center" class="input-group-text" id="subtotal-' . $fid . '">$0.00</span></td>';
+                  echo '<td><input class="qty-input" type="number" data-target="#subtotal-' . $fid . '" data-id="' . $fid . '" name="form['.$fid.']" step="1" min="0" value="0" data-amount="' . $price . '"></td>';
+                  echo '<td id="subtotal-' . $fid . '" class="subtotal" data-total="0">$0.00</td>';
                   echo "</tr>";    
               }
   
@@ -94,12 +102,11 @@
       <br>
       <hr>
         <div style="float:right" class="checkout">
-          <p class="lead" >Total amount payable:</p><span style="text-align: center" class="input-group-text" id="total">$0.00</span>
+          <p class="lead" >Total amount payable:</p><h4 id="total">$0.00</h4>
           <?php
           if (!isset($_SESSION["name"]))
             echo '<br><span class="badge badge-warning">Please login to start ordering</span>';
           ?>
-          <button style="float:right; margin-top:10px; margin-bottom:10px;" type="button" class="btn btn-success" <?php if (!isset($_SESSION["username"])) {echo "disabled";}?>>Check Out</button>
         </div>
 </div>
 </body>
@@ -111,16 +118,30 @@
     var quantity = $(this).val()
 
     var total = parseFloat(amount * quantity).toFixed(2);
-    
-    // var before = target.val();
-    // var difference = total - before;
-    // alert(difference);
-    $(target).html(`$${total}`)
-    $(target).html(`$${total}`)
+    $(target).html(`$${total}`).data('total', total) // store in data
+
+    var alltotal = Array.from($('.subtotal'))
+      .map(el => parseFloat($(el).data('total')))
+      .reduce((total, next) => total + next)
+
+    $('#total').html(`$${alltotal.toFixed(2)}`)
   })
+  /// you need to call the code below, copy paste where you need this
+  // you want to call this code on submit, 
+  Array.from($('.qty-input:visible')).map(function(el) {
+    return {
+      id: $(el).data('id'),
+      quantity: parseInt($(el).val()),
+      price: $(el).data('price')
+    }
+  }).filter(function(obj) {
+    return obj.quantity != 0
+  })
+    
 
    $('.input-group-text').on('change', function() {
     this.value = parseFloat(this.value).toFixed(2);
+    // this code does nothing
   })
 
   $("input[type='number']").inputSpinner()
