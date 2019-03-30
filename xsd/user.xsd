@@ -1,17 +1,53 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--Created with Liquid Studio 2018 (https://www.liquid-technologies.com)-->
-<schema xmlns:tns="qualified" elementFormDefault="qualified" targetNamespace="qualified" xmlns="http://www.w3.org/2001/XMLSchema">
-    <element name="Login">
-        <complexType>
-            <sequence>
-                <element name="username" minOccurs="1" maxOccurs="1">
-                    <simpleType>
-                        <restriction base="string">
-                            <maxLength value="16" />
-                        </restriction>
-                    </simpleType>
-                </element>
-            </sequence>
-        </complexType>
-    </element>
-</schema>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Login">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="16" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="fullname" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="64" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="telegramid" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                            <xs:totalDigits value="16" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="email" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="64" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="hpnumber" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                            <xs:totalDigits value="11" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="Notification">
+        <xs:sequence>
+            <xs:element name="telegramid" type="xs:integer" minOccurs="1" maxOccurs="1" />
+            <xs:element name="email" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="hpnumber" type="xs:integer" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="Notification" type="Notification" />
+</xs:schema>
