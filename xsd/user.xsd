@@ -1,24 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Created with Liquid Studio 2018 (https://www.liquid-technologies.com) -->
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid Studio 2018 (https://www.liquid-technologies.com)-->
 <schema xmlns:tns="qualified" elementFormDefault="qualified" targetNamespace="qualified" xmlns="http://www.w3.org/2001/XMLSchema">
-    <complexType name="Notification">
-        <sequence>
-            <element name="telegramid" type="integer" minOccurs="1" />
-            <element name="email" type="string" minOccurs="1" />
-            <element name="hpnumber" type="integer" minOccurs="1" />
-        </sequence>
-    </complexType>
-    <element name="Notification" type="tns:Notification" />
-    
-    <complexType name="Login">
-        <sequence>
-            <element name="username" type="string" minOccurs="1" />
-            <element name="fullname" type="string" minOccurs="1" />
-            <element name="telegramid" type="integer" minOccurs="1" />
-            <element name="email" type="string" minOccurs="1" />
-            <element name="hpnumber" type="integer" minOccurs="1" />
-        </sequence>
-    </complexType>
-    <element name="Login" type="tns:Login" />
-
+    <element name="Login">
+        <complexType>
+            <sequence>
+                <element name="username" minOccurs="1" maxOccurs="1">
+                    <simpleType>
+                        <restriction base="string">
+                            <maxLength value="16" />
+                        </restriction>
+                    </simpleType>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
 </schema>

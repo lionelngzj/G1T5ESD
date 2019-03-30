@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(16) NOT NULL,
   `password` varchar(16) NOT NULL,
   `fullname` char(64) NOT NULL,
-  `telegramid` char(64) NOT NULL,
+  `telegramid` int(16) NOT NULL,
   `email` varchar(64) NOT NULL,
   `hpnumber` int(11) NOT NULL,
   PRIMARY KEY (`username`)
