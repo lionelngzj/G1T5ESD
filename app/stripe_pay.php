@@ -5,15 +5,17 @@
 // handle the price here. Send money over
 $_SESSION["price"] = 199600;
 
-//Session here to take in order info from previous page. Dont think it'll json it. TO change after page finalised.
+//Session here to take in order info from previous page. json it. TO change after page finalised.
 $_SESSION['order_items'] = '[
   {
     "foodname": "Bacon Aglio Olio",
-    "quantity": 1
+    "quantity": 3,
+    "unit_price": 6.5
   },
   {
     "foodname": "Chicken Sausage Cream Pasta",
-    "quantity": 1
+    "quantity": 1,
+    "unit_price": 6.5
   }]';
 
   $stripe = [
@@ -25,10 +27,6 @@ $_SESSION['order_items'] = '[
 // ui
 
 ?>
-<?php
-  // Start the session
-?>
-
 <html>
 <?php
 ?>
@@ -47,7 +45,7 @@ $_SESSION['order_items'] = '[
     <div class="py-2 LegacyBanner-c1d55d67f9fe06fd">
         <h3 id="rest-name">
           <?php
-           echo "Hi";
+           echo "Checkout";
           ?>
         </h3>
     </div>
@@ -75,11 +73,29 @@ $_SESSION['order_items'] = '[
 
     <?php include 'header.php';     ?>
 
+<br>
+ <font size = '+1'> <strong> Basket</strong> <br></font><?php  ?>
 
- <font size = '+1'> <strong> Basket</strong> </font><?php  ?>
+<?php
 
+$items = json_decode($_SESSION['order_items'], true);
+$iter = 0;
 
- <br> <br><br><br> style pretends order list <br><br><br><br><br>
+?>
+<html>
+<table style="width:100%">
+<tr style="background-color:brown;color:white;"><td width = 1>No.</td><td >Item</td><td >Qty.</td> <td> Price</td></tr>
+</html>
+
+<!-- This is where orders put into table -->
+<?php
+foreach ($items as $item){
+  $iter = $iter+1;
+  echo '<tr><td width = 1>'.$iter.'</td><td>'.$item["foodname"].'</td><td>'. $item['quantity'].'</td><td>'.$item["unit_price"]*$item["quantity"], '</td></tr>';
+}
+?>
+
+<table>
 </head>
 
 <body>
@@ -110,8 +126,8 @@ $_SESSION['order_items'] = '[
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
 <br> 
 <div style = "font-family:helvetica;"><font size=+1>
-If you're happy with your order, key in your credit card details here.<br>
-Otherwise, just press the <strong>back</strong> button on your keyboard!
+&nbsp &nbsp &nbsp &nbsp &nbsp If you're happy with your order, key in your credit card details here.<br>
+&nbsp &nbsp &nbsp &nbsp &nbsp Otherwise, just press the <strong>back</strong> button on your browser!
 </font>
 </div>
 
@@ -237,3 +253,13 @@ $("#payment-form").on('submit', function(e) {
 </div>
 <br>
 <div style="margin-left: 20px;">
+
+<style>
+table, th, td {
+  border: 0 solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+}
+</style>
