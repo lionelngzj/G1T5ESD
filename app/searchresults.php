@@ -48,7 +48,8 @@
             <tbody>
     <?php
         $postalcode = $_GET["postal"];
-        $link = "http://" . $_SESSION['serviceurl'] . "/restaurants/Singapore%20" . ($_GET['postal']) . "&AIzaSyABsb0wlw9itDK8XGaWz2hoCeXmg0pb7ww";
+        $link = "http://" . $_SESSION['serviceurl'] . ":8080/restaurants/Singapore%20" . ($_GET['postal']) . "&AIzaSyABsb0wlw9itDK8XGaWz2hoCeXmg0pb7ww";
+
         $url = urlencode($link);
         $handle = get_headers(urldecode($url), 1);
     
