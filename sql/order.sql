@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `date` datetime NOT NULL DEFAULT NOW(),
   `status` varchar(16) NOT NULL,
   `paymentreceipt` varchar(68) NOT NULL,
-  `total_amount` float NOT NULL,
+  `total_amount` float(16) NOT NULL,
   PRIMARY KEY (`orderid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
