@@ -80,7 +80,7 @@ $_SESSION['order_items'] = '[
 
 $items = json_decode($_SESSION['order_items'], true);
 $iter = 0;
-
+$total_payable = 0;
 ?>
 <html>
 <table style="width:100%">
@@ -91,11 +91,14 @@ $iter = 0;
 <?php
 foreach ($items as $item){
   $iter = $iter+1;
-  echo '<tr><td width = 1>'.$iter.'</td><td>'.$item["foodname"].'</td><td>'. $item['quantity'].'</td><td>'.$item["unit_price"]*$item["quantity"], '</td></tr>';
+  echo '<tr><td width = 1>'.$iter.'</td><td>'.$item["foodname"].'</td><td>'. $item['quantity'].'</td><td align="left">'.$item["unit_price"], '</td></tr>';
+  $total_payable = $total_payable + $item["unit_price"]*$item["quantity"];
 }
 ?>
 
-<table>
+<table align="right">
+
+<th> <td>Total amount payable </td> <td><?php echo ($total_payable); ?></td><td>&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp</td></th>
 </head>
 
 <body>
@@ -132,12 +135,14 @@ foreach ($items as $item){
 </div>
 
 <form id="payment-form" action="stripe_process.php" method="POST">
-  <input type="email" name="email" placeholder = "Email">    
-  <input type="text" name="name" placeholder = 'Name'>
+<table>
+<tr><td><input type="email" name="email" placeholder = "Email">    </td><td><input type="text" name="name" placeholder = 'Name'></td></tr>
+</table>
 
-  <div id="card-element"></div>
-  <div id="card-errors"></div>
-
+<table>
+<tr>  <div id="card-element"></div> </tr>
+<tr>  <div id="card-errors"></div> </tr>
+</table>
   <button id="payment" type="submit">Pay Now</button>
 
 

@@ -1,10 +1,10 @@
 <?php
-  // Start the session
+  // Start the session- to remove
   session_start();
   if (!isset($_GET["postal"])) {
     header("Location: index.php", true, 301);
   }
-     
+  $_SESSION['serviceurl'] = 'LAPTOP-44J85PL7';
 ?>
 <html>
 
