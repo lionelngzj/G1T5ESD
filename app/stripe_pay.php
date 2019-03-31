@@ -3,25 +3,14 @@
  require_once('payment/vendor/autoload.php'); ?>
 <?php
 // handle the price here. Send money over
-$_SESSION["price"] = 199600;
+
 
 //Session here to take in order info from previous page. json it. TO change after page finalised.
-$_SESSION['order_items'] = '[
-  {
-    "foodname": "Bacon Aglio Olio",
-    "quantity": 3,
-    "unit_price": 6.5
-  },
-  {
-    "foodname": "Chicken Sausage Cream Pasta",
-    "quantity": 1,
-    "unit_price": 6.5
-  }]';
 
   $stripe = [
-  "secret_key"      => "sk_test_2UKTtMy0XHm9qJrcjWVxDz4Q000nYPPT9Q",
-  "publishable_key" => "pk_test_zN727Q6RajDbfDgtHnEgtyhV00d58C6obv",
-];
+    "secret_key"      => "sk_test_2UKTtMy0XHm9qJrcjWVxDz4Q000nYPPT9Q",
+    "publishable_key" => "pk_test_zN727Q6RajDbfDgtHnEgtyhV00d58C6obv",
+  ];
 
 \Stripe\Stripe::setApiKey($stripe['secret_key']);
 // ui
@@ -77,8 +66,9 @@ $_SESSION['order_items'] = '[
  <font size = '+1'> <strong> Basket</strong> <br></font><?php  ?>
 
 <?php
-
-$items = json_decode($_SESSION['order_items'], true);
+// $imploded = implode($_SESSION['order_items']);
+// $items = json_decode($imploded, true);
+$items = $_SESSION['order_items'];
 $iter = 0;
 $total_payable = 0;
 ?>
@@ -90,9 +80,10 @@ $total_payable = 0;
 <!-- This is where orders put into table -->
 <?php
 foreach ($items as $item){
+  $decoded = json_decode($item);
   $iter = $iter+1;
-  echo '<tr><td width = 1>'.$iter.'</td><td>'.$item["foodname"].'</td><td>'. $item['quantity'].'</td><td align="left">'.$item["unit_price"], '</td></tr>';
-  $total_payable = $total_payable + $item["unit_price"]*$item["quantity"];
+  echo '<tr><td width = 1>'.$iter.'</td><td>'.$decoded->foodname.'</td><td>'. $decoded->quantity.'</td><td align="left">'.$decoded->unit_price, '</td></tr>';
+  $total_payable = $total_payable + $decoded->unit_price*$decoded->quantity;
 }
 ?>
 
@@ -134,7 +125,7 @@ foreach ($items as $item){
 </font>
 </div>
 
-<form id="payment-form" action="stripe_process.php" method="POST">
+<form id="payment-form" action="payment/stripe_process.php" method="POST">
 <table>
 <tr><td><input type="email" name="email" placeholder = "Email">    </td><td><input type="text" name="name" placeholder = 'Name'></td></tr>
 </table>

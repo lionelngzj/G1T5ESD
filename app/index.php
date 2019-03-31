@@ -1,7 +1,7 @@
 <?php
   // Start the session
   session_start();
-  $_SESSION["serviceurl"] = "10.124.138.100";
+  $_SESSION["serviceurl"] = "LAPTOP-44J85PL7";
 ?>
 
 <!DOCTYPE html>

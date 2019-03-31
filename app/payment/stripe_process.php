@@ -4,11 +4,11 @@ require_once('vendor/autoload.php');?>
 
 <?php
 \Stripe\Stripe::setApiKey("sk_test_2UKTtMy0XHm9qJrcjWVxDz4Q000nYPPT9Q");
-
+$_SESSION['price'] =$_SESSION['price']*100;
 echo $_POST["email"];
 
 $charge = \Stripe\Charge::create([
-    "amount" => $_SESSION["price"], //todo- take the charge from first one
+    "amount" => $_SESSION['price'], //todo- take the charge from first one
     "currency" => "sgd",
     "source" => $_POST["stripeToken"],
     "description" => "Charge for " + $_POST["email"]

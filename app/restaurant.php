@@ -22,7 +22,7 @@
         <h3 id="rest-name">
         <?php
             $restaurantID = $_GET["restaurant"];
-            $linkl = "http://" . $surl . ":8080/restaurant" . "?rid=" .  $restaurantID;
+            $linkl = "http://" . $_SESSION['serviceurl'] . ":8080/restaurant" . "?rid=" .  $restaurantID;
             $urll = urlencode($linkl);
             $handle = get_headers(urldecode($urll), 1);
         
@@ -79,14 +79,16 @@
                   $fid = $menu[$i]['fid'];
                   $name = $menu[$i]['name'];
                   $price = $menu[$i]['unit_price'];
-                  $tok = $rid.','.$fid.','.$name.','.$price;
+                  $w_name = str_replace(' ','&nbsp',$name);
+                  $tok = $rid.','.$fid.','.$w_name.','.$price;
                   echo '<tr data-how="' . $fid . '">';
-                  echo '<td style="float:right"><input type="checkbox" id="checkbox-' . $fid . '"></td>';
+                  
+                  echo '<td style="float:right"><p hidden><input type="checkbox" name = "fooditem[]" id="checkbox-' . $fid . '"value = '.($tok).'></p></td>';
                   // echo '<td style="float:right"><p hidden><input type="checkbox" visibility:"hidden" name = "fooditem" value = '.$tok.' checked></p></td>';
 
                   echo '<td>' . $name . '</td>';
                   echo "<td>$" . number_format((float)$price, 2, '.', '') ."</td>";
-                  echo '<td><input class="qty-input" type="number" data-target="#subtotal-' . $fid . '" data-id="' . $fid . '" name="form['.$fid.']" step="1" min="0" value="0" data-amount="' . $price . '"></td>';
+                  echo '<td><input class="qty-input" type="number" data-target="#subtotal-' . $fid . '" data-id="' . $fid . '" name="form[]" step="1" min="0" value="0" data-amount="' . $price . '"></td>';
                   echo '<td id="subtotal-' . $fid . '" class="subtotal" data-total="0">$0.00</td>';
                   echo "</tr>";    
               }
