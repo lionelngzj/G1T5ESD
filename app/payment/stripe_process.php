@@ -13,7 +13,8 @@ $charge = \Stripe\Charge::create([
     "source" => $_POST["stripeToken"],
     "description" => "Charge for " + $_POST["email"]
   ]);
-
+$_SESSION['receipt_url']=$charge->{'receipt_url'};
+// var_dump($charge);
 if ( $charge->{'status'} == 'succeeded'){
     $_SESSION ['amount'] = $charge->{'amount'};
     header("Location: payment_success.php");

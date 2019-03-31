@@ -40,13 +40,13 @@ foreach ($val as $item){
     $split = explode(',',$item);
 
     $split_spaced = str_replace('&nbsp',' ', $split);
-    $input2 = array("fid"=>$split_spaced[1],"foodname"=>$split_spaced[2],"quantity"=> $nums_new[$i],"unit_price"=>$split_spaced[3]);
+    $input2 = array("rid"=>$split_spaced[0],"fid"=>$split_spaced[1],"foodname"=>$split_spaced[2],"quantity"=> $nums_new[$i],"unit_price"=>$split_spaced[3]);
     $send_in2 = json_encode($input2);
     array_push($arr_full,$send_in2);
 }
 
 $_SESSION['order_items'] = $arr;
-$_SESSION['order_items']=$arr_full;
+$_SESSION['order_full']=$arr_full;
 echo"<br><br>";
 $_SESSION['price']= $order_price;
 header("Location: stripe_pay.php");

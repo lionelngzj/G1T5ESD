@@ -3,7 +3,12 @@ session_start();
 echo $_SESSION["price"];
 echo "SUCCESS YAY";
 echo"<br>";
+//to change
+$_SESSION['username'] = 'shawnlee95';
 var_dump($_SESSION['username']);
+var_dump($_SESSION['price']);
+
+
 $amt = $_SESSION['amount']/100;
 echo "Payment of $".$amt. " completed"; 
 // $service_url = "https://api.telegram.org/bot800605180:AAHLqS6II36W7tFLnP54L5EeSSEQ5p-eQQA/sendMessage?chat_id=157884892&text=chinese";
@@ -12,15 +17,18 @@ echo "Payment of $".$amt. " completed";
 //add order to db thru add order microservice
 
 var_dump($_SESSION['order_items']);
+var_dump($_SESSION['order_full']);
+$full_order = $_SESSION['order_full'];
 $service_url = "http://" . $_SESSION['serviceurl'] . ":8081/order2";
+$full_order=json_decode($full_order[0]);
 $food = array( array(
-    "fid"=> 3,
-    "quantity"=> 13)
+    "fid"=> $full_order->fid,
+    "quantity"=> $full_order->quantity)
 );
-$data = array('username' => 'testname',
-'rid' =>10,
-'paymentreceipt' => 'mconalas',
-'total_amount' => 12,
+$data = array('username' => $_SESSION['username'],
+'rid' =>$full_order->rid,
+'paymentreceipt' => $_SESSION['receipt_url'],
+'total_amount' => $amt,
 'order_items_v2' =>  $food
 );
 
