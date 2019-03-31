@@ -38,7 +38,6 @@
       <input type="password" id="login" class="fadeIn third" name="password" placeholder="password">
       <input type="submit" class="fadeIn fourth" value="Log In">
       <a href="restaurantlogin.php">Click here to login as a Restaurant Partner</a>
-
     </form>
 
     <!-- Register -->

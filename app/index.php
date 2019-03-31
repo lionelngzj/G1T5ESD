@@ -1,7 +1,7 @@
 <?php
   // Start the session
   session_start();
-  $_SESSION["serviceurl"] = "LAPTOP-44J85PL7";
+  $_SESSION["serviceurl"] = "10.124.138.100";
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +33,9 @@
     include 'guestindex.html'; 
   } elseif ($_SESSION["usertype"] == "user") {
     include 'userindex.php';
-  } 
+  } else {
+    include 'restaurantui.php';
+  }
 
   include 'footer.html';
 ?>

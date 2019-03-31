@@ -15,12 +15,9 @@
           </div>
         </nav>
     ';
-  // == driver or == restaurant
-  } elseif ($_SESSION["usertype"] == "driver"){
-    //DRIVER nav bar -- to be edited
-    
+  // 
   } else {
-    //CONSUMER nav bar -- to be edited
+    //CONSUMER or RESTAURANT nav bar -- to be edited
     echo '
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <a class="navbar-brand" href="index.php">BragDoof</a>
@@ -31,7 +28,6 @@
             <div class="navbar-nav">
               <a class="nav-item nav-link" href="index.php">Home</a>
               <a class="nav-item nav-link" href="#">Orders</a>
-              <a class="nav-item nav-link" href="#">Profile</a>
               <a class="nav-item nav-link" style="float:right;" href="logout.php">Log Out</a>
             </div>
           </div>
