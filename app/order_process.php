@@ -18,14 +18,14 @@ foreach($nums as $num){
         array_push($nums_new,$num);
     }
 }
+?>
+<?php
 $order_price = 0;
 foreach ($val as $item){
     $i++;
     $split = explode(',',$item);
 
-    var_dump($split);
     $split_spaced = str_replace('&nbsp',' ', $split);
-    var_dump($split_spaced);
     $input = array("foodname"=>$split_spaced[2],"quantity"=> $nums_new[$i],"unit_price"=>$split_spaced[3]);
     $order_price = $order_price+$split_spaced[3]*$nums_new[$i];
     $send_in = json_encode($input);
