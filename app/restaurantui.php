@@ -55,15 +55,14 @@
             }
             echo "</td>";
             echo "<td>$order[2]</td>";
-            echo '<td><button type="button" class="btn btn-success" data-toggle="button" class="button1">Ready for Collection</button>';
-
-            // to add microservice to change ordr status
+            echo '<td><button type="button" class="btn btn-success" data-toggle="button" class="button1">Accept</button>
+            <button type="button" class="btn btn-danger" data-toggle="button" class="button2">Reject</button></td>';
             echo "</tr>";
         }
     ?>
         <style>
-          .button1 {background-color: blue;} 
-          /* Why does this not change the color properly??? */
+          .button1 {background-color: green;}
+          .button2 {background-color: red;}
         </style>
           </tbody>
       </table>

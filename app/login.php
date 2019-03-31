@@ -4,7 +4,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <?php
-  $_SESSION['serviceurl'] = 'LAPTOP-44J85PL7';
   session_start();
   if (isset($_POST["username"])) {
     $url = urlencode("http://" . "{$_SESSION["serviceurl"]}/login/{$_POST["username"]}&{$_POST["password"]}");
@@ -36,8 +35,6 @@
       <input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
       <input type="password" id="login" class="fadeIn third" name="password" placeholder="password">
       <input type="submit" class="fadeIn fourth" value="Log In">
-      <a href="restaurantlogin.php">Click here to login as a Restaurant Partner</a>
-
     </form>
 
     <!-- Register -->
