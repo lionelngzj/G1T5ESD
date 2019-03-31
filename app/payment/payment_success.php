@@ -4,7 +4,7 @@ echo $_SESSION["price"];
 echo "SUCCESS YAY";
 echo"<br>";
 //to change
-$_SESSION['username'] = 'shawnlee95';
+// $_SESSION['username'] = 'shawnlee95';
 var_dump($_SESSION['username']);
 var_dump($_SESSION['price']);
 
