@@ -9,7 +9,7 @@ $val = $_POST['fooditem'];
 $nums = $_POST['form'];
 echo '<br>';
 echo "<br>";
-
+var_dump($val);
 $i=-1;
 $arr = array();
 $nums_new = array();
@@ -18,24 +18,36 @@ foreach($nums as $num){
         array_push($nums_new,$num);
     }
 }
+?>
+<?php
 $order_price = 0;
+//create a array of items ordered
 foreach ($val as $item){
     $i++;
     $split = explode(',',$item);
 
-    var_dump($split);
     $split_spaced = str_replace('&nbsp',' ', $split);
-    var_dump($split_spaced);
     $input = array("foodname"=>$split_spaced[2],"quantity"=> $nums_new[$i],"unit_price"=>$split_spaced[3]);
     $order_price = $order_price+$split_spaced[3]*$nums_new[$i];
     $send_in = json_encode($input);
     array_push($arr,$send_in);
 }
 var_dump($arr);
+$arr_full = array();
+$i=-1;
+foreach ($val as $item){
+    $i++;
+    $split = explode(',',$item);
+
+    $split_spaced = str_replace('&nbsp',' ', $split);
+    $input2 = array("rid"=>$split_spaced[0],"fid"=>$split_spaced[1],"foodname"=>$split_spaced[2],"quantity"=> $nums_new[$i],"unit_price"=>$split_spaced[3]);
+    $send_in2 = json_encode($input2);
+    array_push($arr_full,$send_in2);
+}
 
 $_SESSION['order_items'] = $arr;
+$_SESSION['order_full']=$arr_full;
 echo"<br><br>";
-echo($order_price);
 $_SESSION['price']= $order_price;
 header("Location: stripe_pay.php");
 ?>
