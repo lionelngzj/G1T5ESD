@@ -1,8 +1,6 @@
 <?php
   // Start the session
   session_start();
-  $_SESSION['serviceurl'] = 'LAPTOP-44J85PL7';
-  $surl = 'LAPTOP-44J85PL7';
 ?>
 
 <html>
@@ -83,7 +81,7 @@
                   $price = $menu[$i]['unit_price'];
                   $tok = $rid.','.$fid.','.$name.','.$price;
                   echo '<tr data-how="' . $fid . '">';
-                  echo '<td style="float:right"><p><input type="checkbox" visibility:"hidden" name = "fooditem[]" value = '.$tok.' checked></p></td>';
+                  echo '<td style="float:right"><input type="checkbox" id="checkbox-' . $fid . '"></td>';
                   // echo '<td style="float:right"><p hidden><input type="checkbox" visibility:"hidden" name = "fooditem" value = '.$tok.' checked></p></td>';
 
                   echo '<td>' . $name . '</td>';
@@ -116,6 +114,14 @@
     var amount = $(this).data('amount')
     var target = $(this).data('target')
     var quantity = $(this).val()
+    var id = $(this).data('id')
+
+    if (quantity >= 1) {
+      document.getElementById("checkbox-" + id).checked = true;
+    } else {
+      document.getElementById("checkbox-" + id).checked = false;
+    }
+    
 
     var total = parseFloat(amount * quantity).toFixed(2);
     $(target).html(`$${total}`).data('total', total) // store in data
