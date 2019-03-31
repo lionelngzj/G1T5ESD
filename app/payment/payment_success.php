@@ -3,7 +3,7 @@ session_start();
 echo $_SESSION["price"];
 echo "SUCCESS YAY";
 echo"<br>";
-
+var_dump($_SESSION['username']);
 $amt = $_SESSION['amount']/100;
 echo "Payment of $".$amt. " completed"; 
 // $service_url = "https://api.telegram.org/bot800605180:AAHLqS6II36W7tFLnP54L5EeSSEQ5p-eQQA/sendMessage?chat_id=157884892&text=chinese";
@@ -11,9 +11,10 @@ echo "Payment of $".$amt. " completed";
 // to do db and whatever else here 
 //add order to db thru add order microservice
 
+var_dump($_SESSION['order_items']);
 $service_url = "http://" . $_SESSION['serviceurl'] . ":8081/order2";
 $food = array( array(
-    "fid"=> 2,
+    "fid"=> 3,
     "quantity"=> 13)
 );
 $data = array('username' => 'testname',
