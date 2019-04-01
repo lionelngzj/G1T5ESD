@@ -145,12 +145,6 @@
   }).filter(function(obj) {
     return obj.quantity != 0
   })
-    
-
-   $('.input-group-text').on('change', function() {
-    this.value = parseFloat(this.value).toFixed(2);
-    // this code does nothing
-  })
 
   $("input[type='number']").inputSpinner()
 </script>
