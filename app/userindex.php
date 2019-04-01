@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-xl-9 mx-auto">
           <h1>Welcome back,</h1>
-          <h3 class="mb-5"><?php echo $_SESSION["name"]; ?></h3>
+          <h3 class="mb-5"><?php echo $_SESSION["name"]; ?>
         </div>
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
           <form method="GET" action="searchresults.php">
