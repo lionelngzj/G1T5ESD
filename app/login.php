@@ -6,19 +6,34 @@
 <?php
   $_SESSION['serviceurl'] = 'LAPTOP-44J85PL7';
   session_start();
-  if (isset($_POST["username"])) {
-    $url = urlencode("http://" . "{$_SESSION["serviceurl"]}/login/{$_POST["username"]}&{$_POST["password"]}");
-    $handle = get_headers(urldecode($url), 1);
+  if (isset($_GET["username"])) {
+    $uname = $_GET['username'];
+    $pass = $_GET['password'];
+    $link = "http://" . $_SESSION['serviceurl'] . ":8083/login?username=" .$uname. '&password='.$pass;
 
-    if ($handle[0] == "HTTP/1.1 500 Internal Server Error") {
-      echo "error";
-    } else {
+    $url = urlencode($link);
+    $handle = get_headers(urldecode($url), 1);
+    
+
+    if ($handle[0] == 'HTTP/1.1 200 OK') {
+      $link2 = "http://" . $_SESSION['serviceurl'] . ":8083/users?username=" . $uname;
+
+      $url2 = urlencode($link2);
+      $response2 = file_get_contents(urldecode($url2));
+      $user_detailed = json_decode($response2, true);
+      // var_dump($user_detailed);
+
+      // $response2 = file_get_contents(urldecode($link2));
+      // $response2 = json_decode($response2, true);
+      $_SESSION['name']=$user_detailed['name'];
+      $_SESSION['username']=$_GET["username"];
       $response = file_get_contents(urldecode($url));
       $user = json_decode($response, true);
-      $_SESSION['username'] = $user["username"];
-      $_SESSION["name"] = $user["fullname"];
       $_SESSION["usertype"] = "user";
       header("Location: index.php");
+    }
+    else{
+        echo "error";
     }
   }
 ?>
@@ -33,11 +48,12 @@
     </div>
 
     <!-- Login Form -->
-    <form method="POST">
+    <form method="GET">
       <input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
       <input type="password" id="login" class="fadeIn third" name="password" placeholder="password">
       <input type="submit" class="fadeIn fourth" value="Log In">
       <a href="restaurantlogin.php">Click here to login as a Restaurant Partner</a>
+
     </form>
 
     <!-- Register -->
