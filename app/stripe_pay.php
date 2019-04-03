@@ -26,6 +26,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/search-page.css">
+  <?php include 'header.php';     ?>
 
 </head>
 
@@ -33,9 +34,7 @@
 <div class="banner1 banner2 align-middle">
     <div class="py-2 LegacyBanner-c1d55d67f9fe06fd">
         <h3 id="rest-name">
-          <?php
-           echo "Checkout";
-          ?>
+        Check Out
         </h3>
     </div>
 </div>
@@ -44,23 +43,7 @@
 
 </body>
 
-<?php
-// this is where the credit card info tat we need is
 
-?>
-<html>
-
-<head>
-<br>
-    <title>BragDoof</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="css/search-page.css">
-
-    <?php include 'header.php';     ?>
 
 <br>
  <font size = '+1'> <strong> Basket</strong> <br></font><?php  ?>
@@ -72,10 +55,10 @@ $items = $_SESSION['order_items'];
 $iter = 0;
 $total_payable = 0;
 ?>
-<html>
+
 <table style="width:100%">
 <tr style="background-color:brown;color:white;"><td width = 1>No.</td><td >Item</td><td >Qty.</td> <td> Price</td></tr>
-</html>
+
 
 <!-- This is where orders put into table -->
 <?php
@@ -91,22 +74,6 @@ foreach ($items as $item){
 
 <th> <td>Total amount payable </td> <td><?php echo ($total_payable); ?></td><td>&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp</td></th>
 </head>
-
-<body>
-
-
-</div>
-
-                </tr>
-            </thead>
-            <tbody>
-    <?php
-
-    ?>
-            </tbody>
-        </table>
-    </div>
-</body>
 
 <script>
     $('#table-restaurant td').click(function() {
@@ -241,12 +208,7 @@ $("#payment-form").on('submit', function(e) {
 
 </style>
 
-<div class="banner1 banner2 align-middle">
-    <div class="py-2 LegacyBanner-c1d55d67f9fe06fd">
-        <h3>Food only for our Doofers</h3>
-        <p class="bannertext">Prepared with love by our partner restaurants.</p>
-    </div>
-</div>
+
 <br>
 <div style="margin-left: 20px;">
 

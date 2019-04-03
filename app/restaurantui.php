@@ -9,28 +9,33 @@
                 $response = json_decode($response, true);
                 
                 echo($response["name"]);
-                // var_dump($response);
             ?>
           </h4>
 
     <p class="lead">Pending Orders</p>
       <div id="container-orders"></div>
-        <table class="table table-hover" id="table-orders">
-          <thead>
-            <tr>
-              <th scope="col">OrderID</th>
-              <th scope="col">Order Status</th>
-              <th scope="col">Food</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-    <?php
-                    
+
+      <?php
+                     
       $link = "http://" . $_SESSION['serviceurl'] . ":8081/restaurantorder?rid=" . $_SESSION['rid'];
       $response = file_get_contents($link);
       $response = json_decode($response, true);
-      $orders = $response['Order'];
+      if (empty($response)) {
+        echo "There are no pending orders!";
+      } else {
+        echo '
+        <table class="table table-hover" id="table-orders">
+        <thead>
+          <tr>
+            <th scope="col">OrderID</th>
+            <th scope="col">Order Status</th>
+            <th scope="col">Food</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>';
+        
+        $orders = $response['Order'];
     
         foreach ($orders as $order) {
           echo '<tr data-how="' . $order['orderid'] . '">';
@@ -42,16 +47,18 @@
           foreach ($items as $item) {
             echo $item['foodname'] . " x " . $item['quantity'] . "<br>";
           }
-          echo "</td>";
-          echo '<td><button id="update" data-id="' . $order['orderid'] . '" type="button" class="btn btn-success" data-toggle="button">Ready for Collection</button>';
-        
-          // to add microservice to change order status
+            echo "</td>";
+            echo '<td><button id="update" data-id="' . $order['orderid'] . '" type="button" class="btn btn-success" data-toggle="button">Ready for Collection</button>';
             echo "</tr>";
         }
+
+        echo '
+        </tbody>
+        </table>';
+      }
+
     ?>
-            </tbody>
-        </table>
-      </form>
+
 </div>
       </body>
 
