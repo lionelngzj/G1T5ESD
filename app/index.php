@@ -44,19 +44,25 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
-  $('#update').click(function() {
-    var id = $(this).data('id')
-    let data = {"rid":id}
-    $.ajax({
-        type: 'PUT',
-        url: 'http://10.124.138.100:8081/update_order',
-        contentType: 'application/json',
-        data: JSON.stringify(data), // access in body
-    }).done(function () {
-      alert("successfully updated order " + id + " to ready to collect")
-      location.reload();
+    $(".ready-form").on("submit", function(e) {
+      e.preventDefault()
+      var id = $(this).data('id')
+      
+      let data = {"status":"ready"}
+      $.ajax({
+          type: 'PATCH',
+          url: 'http://10.124.138.100:8081/update/' + id,
+          contentType: 'application/json',
+          data: JSON.stringify(data), // access in body
+      }).done(function () {
+        alert("successfully updated order " + id + " to ready to collect")
+        var btn = document.getElementById("btn-" + id)
+        btn.disabled = true;
+        
+        var status = document.getElementById("status-" + id)
+        status.innerHTML = "ready"
+      })
     })
-  })
 </script>
 </body>
 </html>

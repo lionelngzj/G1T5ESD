@@ -40,7 +40,7 @@
         foreach ($orders as $order) {
           echo '<tr data-how="' . $order['orderid'] . '">';
           echo "<td>{$order['orderid']}</td>";         
-          echo "<td>{$order['status']}</td>";
+          echo "<td id='status-" . $order["orderid"] . "'>{$order['status']}</td>";
 
           $items = $order['order_items'];
           echo "<td>";
@@ -48,8 +48,10 @@
             echo $item['foodname'] . " x " . $item['quantity'] . "<br>";
           }
             echo "</td>";
-            echo '<td><button id="update" data-id="' . $order['orderid'] . '" type="button" class="btn btn-success" data-toggle="button">Ready for Collection</button>';
-            echo "</tr>";
+            echo '<td><form class="ready-form" data-id="' . $order["orderid"] . '">
+                  <input type="submit" id="btn-' . $order["orderid"] . '" class="btn btn-success" value="Ready for collection">
+                  </td></form>';
+            echo  '</tr>';
         }
 
         echo '
