@@ -27,3 +27,4 @@ Edit the hostname of the URL on both line 4 and line 54.
 
 ========================  APACHE  =============================
 Set up an alias or place the app folder into the webroot folder C:\wamp64\www\
+Load the path or index.php
