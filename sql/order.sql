@@ -22,9 +22,10 @@ CREATE TABLE IF NOT EXISTS `orders` (
 
 INSERT INTO `orders` (`username`, `rid`, `date`, `status`,`paymentreceipt`, `total_amount`) VALUES
 ('shawnlee95', 1, '2019-03-16 12:55:00', 'ready', '#1777-6432', 109.00),
-('yuxin', 2, '2019-03-17 15:40:00', 'ready', '#1777-6433', 13.00),
-('lionelng96', 1, '2019-03-17 17:22:10', 'ready', '#1777-6434', 23.4),
-('yuxin', 1, '2019-03-18 11:32:03', 'paid', '#1777-6435', 18.3);
+('yuxin', 2, '2019-03-17 15:40:00', 'paid', '#1777-6433', 13.00),
+('lionelng96', 1, '2019-03-17 17:22:10', 'paid', '#1777-6434', 23.4),
+('yuxin', 1, '2019-03-18 11:32:03', 'paid', '#1777-6435', 18.3),
+('darrenlim96', 1, '2019-03-18 17:22:10', 'paid', '#1777-6435', 5.5);
 
 
 DROP TABLE IF EXISTS `orderitems`;
@@ -44,4 +45,5 @@ INSERT INTO `orderitems` (`orderid`, `fid`, `quantity`) VALUES
 (3, 7, 6),
 (4, 4, 1),
 (4, 5, 1),
-(4, 6, 1);
+(4, 6, 1),
+(5, 4, 1);
