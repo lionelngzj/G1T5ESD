@@ -2,11 +2,7 @@
 
  require_once('payment/vendor/autoload.php'); ?>
 <?php
-// handle the price here. Send money over
-
-
 //Session here to take in order info from previous page. json it. TO change after page finalised.
-
   $stripe = [
     "secret_key"      => "sk_test_2UKTtMy0XHm9qJrcjWVxDz4Q000nYPPT9Q",
     "publishable_key" => "pk_test_zN727Q6RajDbfDgtHnEgtyhV00d58C6obv",
@@ -17,8 +13,6 @@
 
 ?>
 <html>
-<?php
-?>
 <head>
   <title>BragDoof</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
@@ -27,7 +21,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/search-page.css">
   <?php include 'header.php';     ?>
-
 </head>
 
 <body>
@@ -39,14 +32,10 @@
     </div>
 </div>
 <br>
-<div style="margin-left: 20px;">
-
-</body>
+<div class="container">
 
 
-
-<br>
- <font size = '+1'> <strong> Basket</strong> <br></font><?php  ?>
+<br><font size = '+1'> <strong> Basket</strong><br></font>
 
 <?php
 // $imploded = implode($_SESSION['order_items']);
@@ -71,10 +60,8 @@ foreach ($items as $item){
 ?>
 
 <table align="right">
-
-<th> <td>Total amount payable:</td> <td><?php echo '$' . number_format($total_payable,2, '.',''); ?></td><td>
-&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp</td></th>
-</head>
+  <th><td>Total amount payable:</td> <td><?php echo '$' . number_format($total_payable,2, '.',''); ?></td></th>
+</table>
 
 <script>
     $('#table-restaurant td').click(function() {
@@ -87,25 +74,26 @@ foreach ($items as $item){
 <script src="https://js.stripe.com/v3/"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
 <br> 
-<div style = "font-family:helvetica;"><font size=+1>
-&nbsp &nbsp &nbsp &nbsp &nbsp If you're happy with your order, key in your credit card details here.<br>
-&nbsp &nbsp &nbsp &nbsp &nbsp Otherwise, just press the <strong>back</strong> button on your browser!
-</font>
-</div>
 
-<form id="payment-form" action="payment/stripe_process.php" method="POST" target="_blank">
-<table>
-<tr><td><input type="email" name="email" placeholder = "Email">    </td><td><input type="text" name="name" placeholder = 'Name'></td></tr>
-</table>
+  <div style = "font-family:helvetica; width: 50%;">
+    <font size=+1>
+      If you're happy with your order, key in your credit card details here.<br>
+      Otherwise, just press the <strong>back</strong> button on your browser!
+    </font>
 
-<table>
-<tr>  <div id="card-element"></div> </tr>
-<tr>  <div id="card-errors"></div> </tr>
-</table>
-  <button id="payment" type="submit">Pay Now</button>
-
-
-</form>
+    <form id="payment-form" action="payment/stripe_process.php" method="POST" target="_blank">
+      <table>
+      <tr><td><input type="email" name="email" placeholder = "Email">    </td><td><input type="text" name="name" placeholder = 'Name'></td></tr>
+      </table>
+      <table>
+        <tr><div id="card-element" style="width:500px"></div> </tr>
+        <tr><div id="card-errors"></div> </tr>
+      </table>
+      <button id="payment" type="submit">Pay Now</button>
+    </form>
+    
+  </div>
+</body>
 
 <script>
 var stripe = Stripe('<?php echo $stripe['publishable_key']; ?>')
