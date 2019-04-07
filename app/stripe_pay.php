@@ -57,7 +57,7 @@ $total_payable = 0;
 ?>
 
 <table style="width:100%">
-<tr style="background-color:brown;color:white;"><td width = 1>No.</td><td >Item</td><td >Qty.</td> <td> Price</td></tr>
+<tr style="background-color:brown;color:white;"><td width = 1>No.</td><td >Item</td><td >Qty.</td> <td> Unit Price</td></tr>
 
 
 <!-- This is where orders put into table -->
@@ -65,14 +65,15 @@ $total_payable = 0;
 foreach ($items as $item){
   $decoded = json_decode($item);
   $iter = $iter+1;
-  echo '<tr><td width = 1>'.$iter.'</td><td>'.$decoded->foodname.'</td><td>'. $decoded->quantity.'</td><td align="left">'.$decoded->unit_price, '</td></tr>';
+  echo '<tr><td width = 1>'.$iter.'</td><td>'.$decoded->foodname.'</td><td>'. $decoded->quantity.'</td><td align="left">$'.number_format($decoded->unit_price,2, '.',''). '</td></tr>';
   $total_payable = $total_payable + $decoded->unit_price*$decoded->quantity;
 }
 ?>
 
 <table align="right">
 
-<th> <td>Total amount payable </td> <td><?php echo ($total_payable); ?></td><td>&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp</td></th>
+<th> <td>Total amount payable:</td> <td><?php echo '$' . number_format($total_payable,2, '.',''); ?></td><td>
+&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp</td></th>
 </head>
 
 <script>
@@ -92,7 +93,7 @@ foreach ($items as $item){
 </font>
 </div>
 
-<form id="payment-form" action="payment/stripe_process.php" method="POST">
+<form id="payment-form" action="payment/stripe_process.php" method="POST" target="_blank">
 <table>
 <tr><td><input type="email" name="email" placeholder = "Email">    </td><td><input type="text" name="name" placeholder = 'Name'></td></tr>
 </table>
