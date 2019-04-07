@@ -36,13 +36,15 @@
         <tbody>';
         
         $orders = $response['Order'];
-    
+        // var_dump($orders);
+
         foreach ($orders as $order) {
           echo '<tr data-how="' . $order['orderid'] . '">';
           echo "<td>{$order['orderid']}</td>";         
           echo "<td id='status-" . $order["orderid"] . "'>{$order['status']}</td>";
 
           $items = $order['order_items'];
+
           echo "<td>";
           foreach ($items as $item) {
             echo $item['foodname'] . " x " . $item['quantity'] . "<br>";

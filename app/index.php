@@ -1,7 +1,7 @@
 <?php
   // Start the session
   session_start();
-  $_SESSION["serviceurl"] = "10.124.138.100";
+  $_SESSION["serviceurl"] = "DESKTOP-HJ9Q2AV";
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +51,7 @@
       let data = {"status":"ready"}
       $.ajax({
           type: 'PATCH',
-          url: 'http://10.124.138.100:8081/update/' + id,
+          url: 'http://DESKTOP-HJ9Q2AV:8081/update/' + id,
           contentType: 'application/json',
           data: JSON.stringify(data), // access in body
       }).done(function () {
