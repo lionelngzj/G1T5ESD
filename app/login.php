@@ -4,10 +4,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <?php
-<<<<<<< HEAD
-  $_SESSION['serviceurl'] = 'DESKTOP-HJ9Q2AV';
-=======
->>>>>>> a5e43cc04b330ada88b30627b4b1c5ecb3e738ff
   session_start();
   if (isset($_GET["username"])) {
     $uname = $_GET['username'];
