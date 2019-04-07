@@ -25,11 +25,12 @@
     </div>
 
     <!-- Login Form -->
+    <br>
+    <small>For demo purpose, you will always be logged into rid = 1 (Odette)</small>
     <form method="POST">
       <!-- <input type="text" id="login" class="fadeIn second" name="username" placeholder="Restaurant Username"> -->
       <!-- <input type="password" id="login" class="fadeIn third" name="password" placeholder="password"> -->
       <input type="submit" name="login" class="fadeIn fourth" value="Log In">
-
     </form>
 
     <!-- Register -->
