@@ -4,37 +4,28 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <?php
+<<<<<<< HEAD
   $_SESSION['serviceurl'] = 'DESKTOP-HJ9Q2AV';
+=======
+>>>>>>> a5e43cc04b330ada88b30627b4b1c5ecb3e738ff
   session_start();
   if (isset($_GET["username"])) {
     $uname = $_GET['username'];
     $pass = $_GET['password'];
     $link = "http://" . $_SESSION['serviceurl'] . ":8083/login?username=" .$uname. '&password='.$pass;
 
-    $url = urlencode($link);
-    $handle = get_headers(urldecode($url), 1);
-    
+    $response = file_get_contents(urldecode($link));
+    $response = json_decode($response, true);
+    $status = ($response['status']);
 
-    if ($handle[0] == 'HTTP/1.1 200 OK') {
-      $link2 = "http://" . $_SESSION['serviceurl'] . ":8083/users?username=" . $uname;
-
-      $url2 = urlencode($link2);
-      $response2 = file_get_contents(urldecode($url2));
-      $user_detailed = json_decode($response2, true);
-      // var_dump($user_detailed);
-
-      // $response2 = file_get_contents(urldecode($link2));
-      // $response2 = json_decode($response2, true);
-      $_SESSION['name']=$user_detailed['name'];
-      $_SESSION['username']=$_GET["username"];
-      $response = file_get_contents(urldecode($url));
-      $user = json_decode($response, true);
+    if ($status == 1) {
+      $_SESSION['username'] = $uname;
       $_SESSION["usertype"] = "user";
-      header("Location: index.php");
+      header('Location: index.php');
+    } else {
+      echo "Invalid login credentials";
     }
-    else{
-        echo "error";
-    }
+    
   }
 ?>
 

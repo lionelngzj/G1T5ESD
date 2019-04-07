@@ -1,3 +1,55 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+-- -----------------------------------------------------------------------------------------
+DROP DATABASE IF EXISTS `order`;
+CREATE DATABASE `order` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `order`;
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `orderid` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(16) NOT NULL,
+  `rid` int(11) NOT NULL,
+  `date` datetime NOT NULL DEFAULT NOW(),
+  `status` varchar(16) NOT NULL,
+  `paymentreceipt` varchar(256) NOT NULL,
+  `total_amount` float(16) NOT NULL,
+  PRIMARY KEY (`orderid`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+INSERT INTO `orders` (`username`, `rid`, `date`, `status`,`paymentreceipt`, `total_amount`) VALUES
+('shawnlee95', 1, '2019-03-16 12:55:00', 'ready', '#1777-6432', 109.00),
+('yuxin', 2, '2019-03-17 15:40:00', 'paid', '#1777-6433', 13.00),
+('lionelng96', 1, '2019-03-17 17:22:10', 'paid', '#1777-6434', 23.4),
+('yuxin', 1, '2019-03-18 11:32:03', 'paid', '#1777-6435', 18.3),
+('darrenlim96', 1, '2019-03-18 17:22:10', 'paid', '#1777-6435', 5.5);
+
+
+DROP TABLE IF EXISTS `orderitems`;
+CREATE TABLE IF NOT EXISTS `orderitems` (
+  `orderid` int(11) NOT NULL,
+  `fid` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  PRIMARY KEY (`orderid`, `fid`),
+	CONSTRAINT orderitems_fk FOREIGN KEY (orderid)
+        REFERENCES orders (orderid)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+INSERT INTO `orderitems` (`orderid`, `fid`, `quantity`) VALUES
+(1, 1, 10),
+(2, 1, 1),
+(2, 2, 1),
+(3, 7, 6),
+(4, 4, 1),
+(4, 5, 1),
+(4, 6, 1),
+(5, 4, 1);
+
+-- -----------------------------------------------------------------------------------------
+
 DROP DATABASE IF EXISTS `restaurant`;
 CREATE DATABASE `restaurant` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `restaurant`;
@@ -177,3 +229,27 @@ INSERT INTO `menuitems` (`rid`, `fid`, `name`, `unit_price`, `category`) VALUES
 (10, 12, "Fresh Milk", 2.00, "Drinks"),
 (10, 13, "Iced Peach Tea", 2.50, "Drinks"),
 (10, 14, "Oolong Tea", 2.50, "Drinks");
+
+-- -----------------------------------------------------------------------------------------
+
+DROP DATABASE IF EXISTS `user`;
+CREATE DATABASE `user` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `user`;
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `username` varchar(16) NOT NULL,
+  `password` varchar(16) NOT NULL,
+  `fullname` char(64) NOT NULL,
+  `telegramid` int(16) NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `hpnumber` int(11) NOT NULL,
+  PRIMARY KEY (`username`)
+)ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+INSERT INTO `user` (`username`, `password`, `fullname`, `telegramid`, `email`, `hpnumber`) VALUES
+('shawnlee95', 'shawnlee123', 'Shawn Lee Min Hwee', 248395638, 'shawn.lee.2017@smu.edu.sg', 98765432),
+('lionelng96', 'lionelng123', 'Lionel Ng Ze Ji', 80771196, 'lionel.ng.2017@smu.edu.sg', 87654321),
+('yuxin', '123', 'Goh Yu Xin', 44771340, 'yuxin.goh.2017@smu.edu.sg', 76543210),
+( "darrenlim96", "darren123", "Darren Lim Cong Hao", 188176270, "darren.lim.2017@smu.edu.sg", 65432109),
+("ignatiustan96", "ignatius", "Ignatius Tan Jun Hong", 157884892,"ignatiustan.2017@sis.smu.edu.sg", 54321098);
