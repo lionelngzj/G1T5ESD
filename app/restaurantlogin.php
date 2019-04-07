@@ -6,7 +6,7 @@
 <!-- to check- which db is  restaurant login data stored. Should/can we send this restaurant info to another page for processing?-->
 <?php
   session_start();
-  if (isset($_POST["username"])) {
+  if (isset($_POST["login"])) {
       $_SESSION["usertype"] = "restaurant";
       $_SESSION["rid"] = 1;
       header("Location: index.php");
@@ -26,9 +26,9 @@
 
     <!-- Login Form -->
     <form method="POST">
-      <input type="text" id="login" class="fadeIn second" name="username" placeholder="Restaurant Username">
-      <input type="password" id="login" class="fadeIn third" name="password" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
+      <!-- <input type="text" id="login" class="fadeIn second" name="username" placeholder="Restaurant Username"> -->
+      <!-- <input type="password" id="login" class="fadeIn third" name="password" placeholder="password"> -->
+      <input type="submit" name="login" class="fadeIn fourth" value="Log In">
 
     </form>
 
