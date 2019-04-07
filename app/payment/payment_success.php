@@ -74,3 +74,8 @@ var_dump($context);
         $.get($service_url)
     });
 </script>
+
+<?php
+
+header('location:success.php');
+?>
