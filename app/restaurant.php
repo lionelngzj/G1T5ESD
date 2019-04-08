@@ -102,11 +102,11 @@
       <br>
       <hr>
         <div style="float:right" class="checkout">
-          <p class="lead" >Total amount payable:</p><h4 id="total">$0.00</h4>
           <?php
-          if (!isset($_SESSION["username"]))
-            echo '<br><span class="badge badge-warning">Please login to start ordering</span>';
-          ?>
+            if (!isset($_SESSION["username"]))
+              echo '<br><span class="badge badge-warning">Please login to start ordering</span>';
+            ?>
+          <p class="lead" >Total amount payable:</p><h4 id="total">$0.00</h4>
         </div>
 </div>
 </body>
