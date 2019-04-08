@@ -81,7 +81,7 @@ foreach ($items as $item){
       Otherwise, just press the <strong>back</strong> button on your browser!
     </font>
 
-    <form id="payment-form" action="payment/stripe_process.php" method="POST" target="_blank">
+    <form id="payment-form" action="payment/stripe_process.php" method="POST">
       <table>
       <tr><td><input type="email" name="email" placeholder = "Email">    </td><td><input type="text" name="name" placeholder = 'Name'></td></tr>
       </table>
