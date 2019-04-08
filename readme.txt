@@ -10,8 +10,9 @@ Import the following archive files in /Tibco/
 
 Under the Project Explorer, edit the following hostname of the URL for:
 - Notification.module > Resources > notification.module
-  1. HttpClientResource
+  1. HttpClientResource1
   2. HttpClientResource2
+  3. HttpClientResource3
 
 - Order.module > Resources > order.module
   1. HttpClientResource
