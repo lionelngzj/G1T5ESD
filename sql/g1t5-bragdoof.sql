@@ -21,11 +21,11 @@ CREATE TABLE IF NOT EXISTS `orders` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 INSERT INTO `orders` (`username`, `rid`, `date`, `status`,`paymentreceipt`, `total_amount`) VALUES
-('shawnlee95', 1, '2019-03-16 12:55:00', 'ready', '#1777-6432', 109.00),
-('yuxin', 2, '2019-03-17 15:40:00', 'paid', '#1777-6433', 13.00),
-('lionelng96', 1, '2019-03-17 17:22:10', 'paid', '#1777-6434', 23.4),
-('yuxin', 1, '2019-03-18 11:32:03', 'paid', '#1777-6435', 18.3),
-('darrenlim96', 1, '2019-03-18 17:22:10', 'paid', '#1777-6435', 5.5);
+('shawnlee95', 1, '2019-03-16 12:55:00', 'ready', 'https://pay.stripe.com/receipts/acct_1EGIeMBRqlnPxUIT/ch_1EMpMRBRqlnPxUITW6wRChLX/rcpt_EqWPThjHurNhtxqbiaDYuFSLYpECDoI', 109.00),
+('yuxin', 2, '2019-03-17 15:40:00', 'paid', 'https://pay.stripe.com/receipts/acct_1EGIeMBRqlnPxUIT/ch_1EMpPnBRqlnPxUITP9vHoxhB/rcpt_EqWSVdSKP4UaciI2CwVCRPtFT4zwIq1', 13.00),
+('lionelng96', 1, '2019-03-17 17:22:10', 'paid', 'https://pay.stripe.com/receipts/acct_1EGIeMBRqlnPxUIT/ch_1EMpRCBRqlnPxUITsX3IBcgg/rcpt_EqWU5A1GGw1KWNJkm42y6gwvOPIyXYl', 23.4),
+('yuxin', 1, '2019-03-18 11:32:03', 'paid', 'https://pay.stripe.com/receipts/acct_1EGIeMBRqlnPxUIT/ch_1EMpQQBRqlnPxUITpobsuU0M/rcpt_EqWT842YhohvNNGF9Q0Z6x6vP7042ZX', 18.3),
+('darrenlim96', 1, '2019-03-18 17:22:10', 'paid', 'https://pay.stripe.com/receipts/acct_1EGIeMBRqlnPxUIT/ch_1EMp9VBRqlnPxUITVzR6n4ER/rcpt_EqWBQTHOKoQY7BtOQuBoWJDhpNhnevc', 5.5);
 
 
 DROP TABLE IF EXISTS `orderitems`;
