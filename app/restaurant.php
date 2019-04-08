@@ -84,8 +84,6 @@
                   echo '<tr data-how="' . $fid . '">';
                   
                   echo '<td style="float:right"><p hidden><input type="checkbox" name = "fooditem[]" id="checkbox-' . $fid . '"value = '.($tok).'></p></td>';
-                  // echo '<td style="float:right"><p hidden><input type="checkbox" visibility:"hidden" name = "fooditem" value = '.$tok.' checked></p></td>';
-
                   echo '<td>' . $name . '</td>';
                   echo "<td>$" . number_format((float)$price, 2, '.', '') ."</td>";
                   echo '<td><input class="qty-input" type="number" data-target="#subtotal-' . $fid . '" data-id="' . $fid . '" name="form[]" step="1" min="0" value="0" data-amount="' . $price . '"></td>';
@@ -97,12 +95,18 @@
     ?>
           </tbody>
       </table>
-      <button style="float:right; margin-top:10px; margin-bottom:10px;" type="submit" class="btn btn-success" >Check Out</button>'
+
 
       <br>
       <hr>
         <div style="float:right" class="checkout">
-          <?php
+        <button style="float:right; margin-top:10px; margin-bottom:10px; margin-right: 70px" type="submit" class="btn btn-success" 
+        <?php
+          if (!isset($_SESSION["username"]))
+            echo 'disabled';
+        ?>
+      >Check Out</button>
+            <?php
             if (!isset($_SESSION["username"]))
               echo '<br><span class="badge badge-warning">Please login to start ordering</span>';
             ?>
