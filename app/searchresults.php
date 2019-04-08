@@ -59,10 +59,23 @@
             $response = json_decode($response, true);
             $restaurants = $response["restaurants"];
             $length = count($restaurants);
+            $rest_working=array();
+            $index=-1;
+            for($i=0;$i<$length;$i++){
+                $dist = $restaurants[$i]['distance'];
+                $push = array($i=>$dist);
+                $rest_working=array_merge($rest_working,$push);
+            }
 
-            // $restaurants = arsort($restaurants["distance"]);
-            
-
+            asort($rest_working);
+            $restaurants_copy = $restaurants;
+            $restaurants=array();
+            $keys_asc = array_keys($rest_working);
+            foreach($keys_asc as $key){
+                array_push($restaurants,$restaurants_copy[$key]);
+            }
+            // asort($rest2);
+            // var_dump($rest2);
             for($i=0;$i<$length;$i++) {
                 $rid = $restaurants[$i]['rid'];
                 $name = $restaurants[$i]['name'];
